@@ -1,13 +1,11 @@
 [package]
-name = "bicit-cli"
-version = "0.3.0"
-authors = ["Luca Ognibene <luca.ognibene@gmail.com>"]
+name = "bicit"
+version = "0.1.0"
 edition = "2024"
 
 [dependencies]
 clap = { version = "4.5.53", features = ["derive"] }
 anyhow = "1.0.100"
-quick-xml = "0.38.4"
 gpx = "0.10.0"
 geo = "0.32.0"
 geo-types = "0.7.18"
@@ -21,5 +19,4 @@ base64 = "0.22.1"
 galileo = { git = "https://github.com/galileo-map/galileo", package = "galileo" }
 galileo-types = { git = "https://github.com/galileo-map/galileo", package = "galileo-types" }
 image = { version = "0.24.9", default-features = false, features = ["png"] }
-tokio = { version = "1.45.0", features = ["rt-multi-thread"] }
-bicit = { version = "0.1.0", path = "../bicit" }
+tokio = "1.48.0"
