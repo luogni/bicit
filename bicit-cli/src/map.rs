@@ -84,12 +84,12 @@ fn add_round_capped_segments<C>(
         prev = p;
     }
 
-    if contour.is_closed() {
-        if prev.x() != first.x() || prev.y() != first.y() || prev.z() != first.z() {
+    if contour.is_closed()
+        && prev.x() != first.x() || prev.y() != first.y() || prev.z() != first.z() {
             let segment = Contour::open(vec![prev, first]);
             bundle.add_line(&segment, paint, min_resolution);
         }
-    }
+    
 }
 
 fn dedupe_consecutive_coords(coords: &[Point<f64>]) -> Vec<Point<f64>> {

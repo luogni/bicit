@@ -324,8 +324,10 @@ mod tests {
     #[test]
     fn track_name_is_truncated_to_32() {
         let mut gpx = gpx::Gpx::default();
-        let mut trk = gpx::Track::default();
-        trk.name = Some("abcdefghijklmnopqrstuvwxyz0123456789".to_string());
+        let trk = gpx::Track {
+            name: Some("abcdefghijklmnopqrstuvwxyz0123456789".to_string()),
+            ..Default::default()
+        };
         gpx.tracks.push(trk);
 
         let name = Context::compute_track_name(&gpx, "x.gpx");

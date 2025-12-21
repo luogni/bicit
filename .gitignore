@@ -3,3 +3,5 @@
 /bicit-cli/*.svg
 /bicit-cli/out/
 /bicit-cli/target/
+/.tile_cache/
+/bicit-cli/.tile_cache/
