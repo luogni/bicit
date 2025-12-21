@@ -1,12 +1,12 @@
 use std::io::Cursor;
 use std::time::Duration;
 
-use anyhow::{anyhow, Result};
-use base64::engine::general_purpose::STANDARD as BASE64;
+use anyhow::{Result, anyhow};
 use base64::Engine;
+use base64::engine::general_purpose::STANDARD as BASE64;
 use galileo::layer::feature_layer::symbol::Symbol;
 use galileo::layer::raster_tile_layer::RasterTileLayerBuilder;
-use galileo::layer::{feature_layer::FeatureLayerOptions, FeatureLayer};
+use galileo::layer::{FeatureLayer, feature_layer::FeatureLayerOptions};
 use galileo::render::render_bundle::RenderBundle;
 use galileo::render::{LineCap, LinePaint, WgpuRenderer};
 use galileo::tile_schema::TileSchemaBuilder;
@@ -84,12 +84,13 @@ fn add_round_capped_segments<C>(
         prev = p;
     }
 
-    if contour.is_closed()
-        && prev.x() != first.x() || prev.y() != first.y() || prev.z() != first.z() {
-            let segment = Contour::open(vec![prev, first]);
-            bundle.add_line(&segment, paint, min_resolution);
-        }
-    
+    if contour.is_closed() && prev.x() != first.x()
+        || prev.y() != first.y()
+        || prev.z() != first.z()
+    {
+        let segment = Contour::open(vec![prev, first]);
+        bundle.add_line(&segment, paint, min_resolution);
+    }
 }
 
 fn dedupe_consecutive_coords(coords: &[Point<f64>]) -> Vec<Point<f64>> {

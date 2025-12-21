@@ -2,7 +2,7 @@
 name = "bicit-cli"
 version = "0.3.0"
 authors = ["Luca Ognibene <luca.ognibene@gmail.com>"]
-edition = "2021"
+edition = "2024"
 
 [dependencies]
 clap = { version = "4.5.53", features = ["derive"] }

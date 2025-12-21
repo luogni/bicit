@@ -3,8 +3,8 @@ use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
 
-use anyhow::anyhow;
 use anyhow::Result;
+use anyhow::anyhow;
 use chrono::Duration;
 use geo::algorithm::line_measures::Length;
 use geo::{Distance, Geodesic, MultiLineString};
@@ -12,8 +12,8 @@ use geo_types::Point;
 use gpx::read;
 use hhmmss::Hhmmss;
 
-use crate::map::render_track_map_href;
 use crate::InputPath;
+use crate::map::render_track_map_href;
 
 #[derive(Debug)]
 struct ElevPoint {
@@ -246,25 +246,25 @@ impl Context<'_> {
                         }
                     }
 
-                    if let Some(e1) = w1.elevation {
-                        if let Some(e2) = w2.elevation {
-                            let d = e2 - e1;
-                            if d > 0.0 {
-                                uphill += d;
-                            } else {
-                                downhill -= d;
-                            }
-                            if e1 > elevation_max {
-                                elevation_max = e1;
-                            }
-                            if e1 < elevation_min {
-                                elevation_min = e1;
-                            }
-                            elev.push(ElevPoint {
-                                d: cur_distance,
-                                e: e1,
-                            });
+                    if let Some(e1) = w1.elevation
+                        && let Some(e2) = w2.elevation
+                    {
+                        let d = e2 - e1;
+                        if d > 0.0 {
+                            uphill += d;
+                        } else {
+                            downhill -= d;
                         }
+                        if e1 > elevation_max {
+                            elevation_max = e1;
+                        }
+                        if e1 < elevation_min {
+                            elevation_min = e1;
+                        }
+                        elev.push(ElevPoint {
+                            d: cur_distance,
+                            e: e1,
+                        });
                     }
                 }
             }

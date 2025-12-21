@@ -1,6 +1,6 @@
 use anyhow::Result;
-use bicit_cli::context::Context;
 use bicit_cli::Template;
+use bicit_cli::context::Context;
 use clap::Parser;
 
 #[derive(Parser, Debug)]

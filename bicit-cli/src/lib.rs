@@ -4,10 +4,10 @@ pub mod map;
 use anyhow::Result;
 use context::Context;
 use galileo::Color;
-use quick_xml::events::{BytesStart, BytesText, Event};
-use quick_xml::name::QName;
 use quick_xml::Reader;
 use quick_xml::Writer;
+use quick_xml::events::{BytesStart, BytesText, Event};
+use quick_xml::name::QName;
 use std::fs;
 use std::io::Cursor;
 use std::path::PathBuf;
@@ -222,20 +222,18 @@ impl Template<'_> {
                         continue;
                     }
 
-                    if let Some(stroke) = Template::get_attribute(&e, b"stroke") {
-                        if stroke.starts_with('#') {
-                            if let Some(color) = Color::try_from_hex(&stroke) {
-                                return Some(color);
-                            }
-                        }
+                    if let Some(stroke) = Template::get_attribute(&e, b"stroke")
+                        && stroke.starts_with('#')
+                        && let Some(color) = Color::try_from_hex(&stroke)
+                    {
+                        return Some(color);
                     }
 
-                    if let Some(style) = Template::get_attribute(&e, b"style") {
-                        if let Some(stroke) = Template::extract_hex_stroke_from_style(&style) {
-                            if let Some(color) = Color::try_from_hex(&stroke) {
-                                return Some(color);
-                            }
-                        }
+                    if let Some(style) = Template::get_attribute(&e, b"style")
+                        && let Some(stroke) = Template::extract_hex_stroke_from_style(&style)
+                        && let Some(color) = Color::try_from_hex(&stroke)
+                    {
+                        return Some(color);
                     }
                 }
                 Ok(Event::Eof) => break,

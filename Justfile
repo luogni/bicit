@@ -16,6 +16,9 @@ test:
 clippy:
 	cargo clippy --all-targets -- -D warnings
 
+test-all: (test) (clippy)
+    cargo fmt
+
 # Run against the sample GPX in `test/t1.gpx`.
 # Usage examples:
 #   just run-sample
