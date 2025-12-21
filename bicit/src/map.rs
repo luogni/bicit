@@ -6,7 +6,7 @@ use base64::Engine;
 use base64::engine::general_purpose::STANDARD as BASE64;
 use galileo::layer::feature_layer::symbol::Symbol;
 use galileo::layer::raster_tile_layer::RasterTileLayerBuilder;
-use galileo::layer::{FeatureLayer, feature_layer::FeatureLayerOptions};
+use galileo::layer::{FeatureLayer, Layer, feature_layer::FeatureLayerOptions};
 use galileo::render::render_bundle::RenderBundle;
 use galileo::render::{LineCap, LinePaint, WgpuRenderer};
 use galileo::tile_schema::TileSchemaBuilder;
@@ -22,8 +22,23 @@ use geo::Simplify;
 use geo_types::{LineString, Point};
 use image::{DynamicImage, ImageBuffer, ImageFormat, Rgba};
 
+pub struct TrackLayers {
+    pub inner: FeatureLayer<
+        GeoPoint2d,
+        Disambig<Contour<GeoPoint2d>, GeoSpace2d>,
+        RoundSegmentContourSymbol,
+        GeoSpace2d,
+    >,
+    pub outline: FeatureLayer<
+        GeoPoint2d,
+        Disambig<Contour<GeoPoint2d>, GeoSpace2d>,
+        RoundSegmentContourSymbol,
+        GeoSpace2d,
+    >,
+}
+
 #[derive(Debug, Copy, Clone)]
-struct RoundSegmentContourSymbol {
+pub struct RoundSegmentContourSymbol {
     color: Color,
     width: f64,
 }
@@ -107,22 +122,7 @@ fn dedupe_consecutive_coords(coords: &[Point<f64>]) -> Vec<Point<f64>> {
     out
 }
 
-/// Renders an OSM map with the provided track overlay and returns a `data:image/png;base64,...` href.
-///
-/// `coords` are expected to be WGS84 lon/lat points.
-pub fn render_track_map_href(
-    coords: &[Point<f64>],
-    image_size: Size<u32>,
-    track_color: Option<Color>,
-) -> Result<String> {
-    if coords.is_empty() {
-        return Err(anyhow!("error building map: no coordinates"));
-    }
-
-    if image_size.width() == 0 || image_size.height() == 0 {
-        return Err(anyhow!("error building map: invalid image size"));
-    }
-
+pub fn get_layers(coords: &[Point<f64>], track_color: Option<Color>) -> TrackLayers {
     let coords = dedupe_consecutive_coords(coords);
 
     // Simplify a potentially very dense polyline (reduces render time / overdraw).
@@ -166,8 +166,32 @@ pub fn render_track_map_href(
         use_antialiasing: true,
         ..Default::default()
     });
+    TrackLayers {
+        inner: track_inner_layer,
+        outline: track_outline_layer,
+    }
+}
 
-    let extent = track_inner_layer
+/// Renders an OSM map with the provided track overlay and returns a `data:image/png;base64,...` href.
+///
+/// `coords` are expected to be WGS84 lon/lat points.
+pub fn render_track_map_href(
+    coords: &[Point<f64>],
+    image_size: Size<u32>,
+    track_color: Option<Color>,
+) -> Result<String> {
+    if coords.is_empty() {
+        return Err(anyhow!("error building map: no coordinates"));
+    }
+
+    if image_size.width() == 0 || image_size.height() == 0 {
+        return Err(anyhow!("error building map: invalid image size"));
+    }
+
+    let track_layers = get_layers(coords, track_color);
+
+    let extent = track_layers
+        .inner
         .extent_projected(&Crs::EPSG3857)
         .ok_or(anyhow!("error building map: track extent unavailable"))?;
     let center = extent.center();
@@ -196,15 +220,13 @@ pub fn render_track_map_href(
         osm.load_tiles(&map_view).await;
     });
 
-    let map = Map::new(
-        map_view,
-        vec![
-            Box::new(osm),
-            Box::new(track_outline_layer),
-            Box::new(track_inner_layer),
-        ],
-        None::<Box<dyn Messenger>>,
-    );
+    let layers: Vec<Box<dyn Layer>> = vec![
+        Box::new(osm),
+        Box::new(track_layers.inner),
+        Box::new(track_layers.outline),
+    ];
+
+    let map = Map::new(map_view, layers, None::<Box<dyn Messenger>>);
 
     let renderer = runtime
         .block_on(async { WgpuRenderer::new_with_texture_rt(image_size).await })

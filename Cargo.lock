@@ -558,6 +558,7 @@ dependencies = [
 name = "bicit-ui"
 version = "0.1.0"
 dependencies = [
+ "bicit",
  "eframe",
  "egui",
  "galileo",

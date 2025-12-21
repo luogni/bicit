@@ -22,7 +22,7 @@ struct ElevPoint {
 }
 
 #[derive(Debug)]
-struct ContextData {
+pub struct ContextData {
     track_name: String,
     distance: f64,
     speed: f64,
@@ -35,7 +35,7 @@ struct ContextData {
     elevation: Vec<ElevPoint>,
     elevation_max: f64,
     elevation_min: f64,
-    coords: Vec<Point<f64>>,
+    pub coords: Vec<Point<f64>>,
 }
 
 pub struct Context<'a> {
@@ -192,6 +192,10 @@ impl Context<'_> {
             .map(|s| s.to_string_lossy().to_string())
             .filter(|s| !s.is_empty())
             .unwrap_or_else(|| "track".to_string())
+    }
+
+    pub fn get_data(self) -> Option<ContextData> {
+        self.data
     }
 
     pub fn load(&mut self) -> Result<()> {

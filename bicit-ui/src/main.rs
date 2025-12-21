@@ -1,3 +1,5 @@
+use bicit::context;
+use bicit::map;
 use galileo::layer::raster_tile_layer::RasterTileLayerBuilder;
 use galileo::{Map, MapBuilder};
 use galileo_egui::{EguiMap, EguiMapState};
@@ -112,9 +114,18 @@ fn create_map() -> Map {
         .build()
         .expect("failed to create layer");
 
-    MapBuilder::default()
+    let mut ctx = bicit::context::Context::new("./bicit/test/t1.gpx");
+    ctx.load().unwrap();
+    let data = ctx.get_data().unwrap();
+
+    let layers = bicit::map::get_layers(&data.coords, None);
+
+    let map = MapBuilder::default()
         .with_latlon(37.566, 128.9784)
         .with_z_level(8)
         .with_layer(layer)
-        .build()
+        .with_layer(layers.outline)
+        .with_layer(layers.inner)
+        .build();
+    map
 }
