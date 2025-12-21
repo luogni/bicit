@@ -1,0 +1,15 @@
+[package]
+name = "bicit-ui"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = "0.33.3"
+egui = "0.33.3"
+# Map rendering (use git main, not crates.io release)
+galileo = { git = "https://github.com/galileo-map/galileo", package = "galileo" }
+galileo-types = { git = "https://github.com/galileo-map/galileo", package = "galileo-types" }
+galileo-egui = { git = "https://github.com/galileo-map/galileo", package = "galileo-egui" }
+image = { version = "0.24.9", default-features = false, features = ["png"] }
+serde = "1.0.228"
+tokio = { version = "1.45.0", features = ["rt-multi-thread"] }

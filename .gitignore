@@ -5,3 +5,4 @@
 /bicit-cli/target/
 /.tile_cache/
 /bicit-cli/.tile_cache/
+bicit-ui/.tile_cache/
