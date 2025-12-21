@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1080"
+  height="1920"
+  viewBox="0 0 1080 1920">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="20%" r="80%">
+      <stop offset="0" stop-color="#2E1065" />
+      <stop offset="1" stop-color="#030712" />
+    </radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="circleClip">
+      <circle cx="540" cy="560" r="420" />
+    </clipPath>
+
+    <g id="i-pin" fill="none" stroke="#E879F9" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 20c0-7 6-12 13-12s13 5 13 12c0 10-13 26-13 26S18 30 18 20Z"/>
+      <circle cx="31" cy="20" r="4"/>
+    </g>
+    <g id="i-clock" fill="none" stroke="#22D3EE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M32 18v16l10 6"/>
+    </g>
+    <g id="i-play" fill="none" stroke="#22D3EE" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M28 22v20l18-10Z"/>
+    </g>
+    <g id="i-speed" fill="none" stroke="#34D399" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 44c4 10 12 16 24 16s20-6 24-16"/>
+      <path d="M32 44 50 26"/>
+    </g>
+    <g id="i-speed-move" fill="none" stroke="#34D399" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 44c4 10 12 16 24 16s20-6 24-16"/>
+      <path d="M32 44 50 26"/>
+      <path d="M56 20v18l14-9Z"/>
+    </g>
+    <g id="i-bolt" fill="none" stroke="#A78BFA" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M28 6 12 34h16l-4 24 20-30H30z"/>
+    </g>
+    <g id="i-up" fill="none" stroke="#FBBF24" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 56V12"/>
+      <path d="M16 28 32 12 48 28"/>
+    </g>
+    <g id="i-down" fill="none" stroke="#60A5FA" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 8v44"/>
+      <path d="M16 36 32 52 48 36"/>
+    </g>
+    <g id="i-peak" fill="none" stroke="#F472B6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 56 30 20 50 56"/>
+      <path d="M30 36 36 28 42 36"/>
+      <path d="M62 54V18"/>
+      <path d="M54 26 62 18 70 26"/>
+    </g>
+    <g id="i-valley" fill="none" stroke="#F472B6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 56 30 20 50 56"/>
+      <path d="M30 36 36 28 42 36"/>
+      <path d="M62 18v36"/>
+      <path d="M54 46 62 54 70 46"/>
+    </g>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)" />
+
+  <!-- Track name -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="900" font-size="54" fill="#FFFFFF">
+    <text x="540" y="120" text-anchor="middle" style="paint-order:stroke;stroke:#000000;stroke-width:12;stroke-opacity:0.40"><tspan id="value_track_name">--</tspan></text>
+  </g>
+
+  <!-- Circular map "planet" -->
+  <g>
+    <circle cx="540" cy="560" r="430" fill="#111827" opacity="0.65" filter="url(#glow)"/>
+    <image
+      id="image_map"
+      x="120" y="140" width="840" height="840"
+      preserveAspectRatio="xMidYMid slice"
+      clip-path="url(#circleClip)"
+      xlink:href="../map.png" />
+  </g>
+
+  <!-- Elevation neon line -->
+  <path id="path_elevation" d="M 120,1520 960,1260" fill="none" stroke="#22D3EE" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+
+  <!-- Stats: 2 columns x 5 rows with neon accent icons -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="56" fill="#FFFFFF">
+    <g transform="translate(120 1040)">
+      <use href="#i-pin" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_distance">--</tspan></text>
+    </g>
+    <g transform="translate(600 1040)">
+      <use href="#i-clock" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_time">--</tspan></text>
+    </g>
+
+    <g transform="translate(120 1140)">
+      <use href="#i-play" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_moving_time">--</tspan></text>
+    </g>
+    <g transform="translate(600 1140)">
+      <use href="#i-speed" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_speed">--</tspan></text>
+    </g>
+
+    <g transform="translate(120 1240)">
+      <use href="#i-speed-move" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_speed_moving">--</tspan></text>
+    </g>
+    <g transform="translate(600 1240)">
+      <use href="#i-bolt" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_speed_max">--</tspan></text>
+    </g>
+
+    <g transform="translate(120 1340)">
+      <use href="#i-up" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_uphill">--</tspan></text>
+    </g>
+    <g transform="translate(600 1340)">
+      <use href="#i-down" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_downhill">--</tspan></text>
+    </g>
+
+    <g transform="translate(120 1440)">
+      <use href="#i-peak" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_elevation_max">--</tspan></text>
+    </g>
+    <g transform="translate(600 1440)">
+      <use href="#i-valley" transform="translate(0 -36)"/>
+      <text x="90" y="10"><tspan id="value_elevation_min">--</tspan></text>
+    </g>
+  </g>
+</svg>

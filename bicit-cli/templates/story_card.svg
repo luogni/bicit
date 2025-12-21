@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1080"
+  height="1920"
+  viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="topFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.65" />
+      <stop offset="1" stop-color="#000" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="panelFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B0F17" stop-opacity="0.00" />
+      <stop offset="1" stop-color="#0B0F17" stop-opacity="0.92" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-opacity="0.28" />
+    </filter>
+    <clipPath id="mapClip" clipPathUnits="userSpaceOnUse">
+      <rect x="60" y="80" width="960" height="1040" rx="44" />
+    </clipPath>
+
+    <!-- icon set (no labels) -->
+    <g id="i-pin" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 20c0-7 6-12 13-12s13 5 13 12c0 10-13 26-13 26S18 30 18 20Z"/>
+      <circle cx="31" cy="20" r="4"/>
+    </g>
+    <g id="i-clock" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M32 18v16l10 6"/>
+    </g>
+    <g id="i-play" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M28 22v20l18-10Z"/>
+    </g>
+    <g id="i-speed" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 44c2 10 12 18 26 18s24-8 26-18"/>
+      <path d="M32 44 48 30"/>
+    </g>
+    <g id="i-speed-move" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 44c2 10 12 18 26 18s24-8 26-18"/>
+      <path d="M32 44 48 30"/>
+      <path d="M56 24v16l12-8Z"/>
+    </g>
+    <g id="i-bolt" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M28 6 12 34h16l-4 24 20-30H30z"/>
+    </g>
+    <g id="i-up" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 52V12"/>
+      <path d="M18 26 32 12 46 26"/>
+    </g>
+    <g id="i-down" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 12v40"/>
+      <path d="M18 38 32 52 46 38"/>
+    </g>
+    <g id="i-peak" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 54 28 22 46 54"/>
+      <path d="M34 54 44 36 54 54"/>
+      <path d="M62 46V18"/>
+      <path d="M54 26 62 18 70 26"/>
+    </g>
+    <g id="i-valley" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 54 28 22 46 54"/>
+      <path d="M34 54 44 36 54 54"/>
+      <path d="M62 18v28"/>
+      <path d="M54 38 62 46 70 38"/>
+    </g>
+  </defs>
+
+  <rect width="1080" height="1920" fill="#0B0F17" />
+
+  <!-- Map card (avoid filter+clip edge cases by not filtering the group) -->
+  <rect x="60" y="80" width="960" height="1040" rx="44" fill="#111827" filter="url(#shadow)"/>
+  <image
+    id="image_map"
+    x="60" y="80" width="960" height="1040"
+    preserveAspectRatio="xMidYMid slice"
+    clip-path="url(#mapClip)"
+    xlink:href="../map.png" />
+  <rect x="60" y="80" width="960" height="260" rx="44" fill="url(#topFade)" clip-path="url(#mapClip)" />
+  <g clip-path="url(#mapClip)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="44" fill="#FFFFFF">
+    <text x="90" y="150" opacity="0.95" style="paint-order:stroke;stroke:#000000;stroke-width:6;stroke-opacity:0.25"><tspan id="value_track_name">--</tspan></text>
+  </g>
+  <rect x="60" y="80" width="960" height="1040" rx="44" fill="none" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="2" />
+
+  <!-- Stats panel background -->
+  <rect x="0" y="1120" width="1080" height="800" fill="url(#panelFade)"/>
+
+  <!-- Elevation background + path (defines the chart size) -->
+  <rect x="60" y="1200" width="960" height="240" rx="30" fill="#111827" opacity="0.78" />
+  <path id="path_elevation" d="M 90,1410 990,1210" fill="none" stroke="#22C55E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Stat chips: 2 columns x 5 rows (fits inside 1920px) -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="700" font-size="38" fill="#FFFFFF">
+    <!-- row 1 -->
+    <g transform="translate(60 1472)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-pin" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_distance">--</tspan></text>
+    </g>
+    <g transform="translate(550 1472)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-clock" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_time">--</tspan></text>
+    </g>
+
+    <!-- row 2 -->
+    <g transform="translate(60 1564)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-play" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_moving_time">--</tspan></text>
+    </g>
+    <g transform="translate(550 1564)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-speed" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_speed">--</tspan></text>
+    </g>
+
+    <!-- row 3 -->
+    <g transform="translate(60 1656)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-speed-move" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_speed_moving">--</tspan></text>
+    </g>
+    <g transform="translate(550 1656)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-bolt" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_speed_max">--</tspan></text>
+    </g>
+
+    <!-- row 4 -->
+    <g transform="translate(60 1748)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-up" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_uphill">--</tspan></text>
+    </g>
+    <g transform="translate(550 1748)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-down" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_downhill">--</tspan></text>
+    </g>
+
+    <!-- row 5 -->
+    <g transform="translate(60 1840)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-peak" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_elevation_max">--</tspan></text>
+    </g>
+    <g transform="translate(550 1840)">
+      <rect width="470" height="80" rx="22" fill="#111827" opacity="0.90" />
+      <use href="#i-valley" transform="translate(20 14) scale(0.75)"/>
+      <text x="95" y="52"><tspan id="value_elevation_min">--</tspan></text>
+    </g>
+  </g>
+</svg>

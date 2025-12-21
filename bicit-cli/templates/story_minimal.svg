@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1080"
+  height="1920"
+  viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111827" />
+      <stop offset="1" stop-color="#020617" />
+    </linearGradient>
+    <clipPath id="mapClip" clipPathUnits="userSpaceOnUse">
+      <rect x="90" y="120" width="900" height="900" rx="60" />
+    </clipPath>
+
+    <g id="i-pin" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 20c0-7 6-12 13-12s13 5 13 12c0 10-13 26-13 26S18 30 18 20Z"/>
+      <circle cx="31" cy="20" r="4"/>
+    </g>
+    <g id="i-clock" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M32 18v16l10 6"/>
+    </g>
+    <g id="i-play" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M28 22v20l18-10Z"/>
+    </g>
+    <g id="i-speed" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 46c2 10 12 18 26 18s24-8 26-18"/>
+      <path d="M32 46 50 30"/>
+    </g>
+    <g id="i-speed-move" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 46c2 10 12 18 26 18s24-8 26-18"/>
+      <path d="M32 46 50 30"/>
+      <path d="M58 24v20l14-10Z"/>
+    </g>
+    <g id="i-bolt" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M28 6 12 34h16l-4 24 20-30H30z"/>
+    </g>
+    <g id="i-up" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 56V12"/>
+      <path d="M16 28 32 12 48 28"/>
+    </g>
+    <g id="i-down" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 8v44"/>
+      <path d="M16 36 32 52 48 36"/>
+    </g>
+    <g id="i-peak" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 56 30 20 50 56"/>
+      <path d="M30 36 36 28 42 36"/>
+      <path d="M62 52V18"/>
+      <path d="M54 26 62 18 70 26"/>
+    </g>
+    <g id="i-valley" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 56 30 20 50 56"/>
+      <path d="M30 36 36 28 42 36"/>
+      <path d="M62 18v34"/>
+      <path d="M54 44 62 52 70 44"/>
+    </g>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)" />
+
+  <!-- Map block -->
+  <rect x="90" y="120" width="900" height="900" rx="60" fill="#0B1220" opacity="0.95" />
+  <image
+    id="image_map"
+    x="90" y="120" width="900" height="900"
+    preserveAspectRatio="xMidYMid slice"
+    clip-path="url(#mapClip)"
+    xlink:href="../map.png" />
+  <rect x="90" y="120" width="900" height="120" rx="60" fill="#000" opacity="0.30" clip-path="url(#mapClip)" />
+  <g clip-path="url(#mapClip)" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="900" font-size="54" fill="#FFFFFF">
+    <text x="130" y="200" style="paint-order:stroke;stroke:#000000;stroke-width:8;stroke-opacity:0.35"><tspan id="value_track_name">--</tspan></text>
+  </g>
+
+  <!-- Elevation line (kept out of the text area) -->
+  <path id="path_elevation" d="M 120,1110 960,1045" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.40" />
+
+  <!-- Hero metrics (icons only, no labels) -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="900" fill="#FFFFFF">
+    <g transform="translate(120 1160)">
+      <use href="#i-pin" transform="translate(0 -36)"/>
+      <text x="96" y="10" font-size="86"><tspan id="value_distance">--</tspan></text>
+    </g>
+    <g transform="translate(120 1300)">
+      <use href="#i-clock" transform="translate(0 -36)"/>
+      <text x="96" y="10" font-size="70"><tspan id="value_time">--</tspan></text>
+    </g>
+    <g transform="translate(120 1420)">
+      <use href="#i-up" transform="translate(0 -36)"/>
+      <text x="96" y="10" font-size="70"><tspan id="value_uphill">--</tspan></text>
+    </g>
+  </g>
+
+  <!-- Secondary metrics in a compact footer grid -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="800" font-size="52" fill="#FFFFFF" opacity="0.95">
+    <!-- row 1 -->
+    <g transform="translate(120 1560)">
+      <use href="#i-speed" transform="translate(0 -36)"/>
+      <text x="96" y="10"><tspan id="value_speed">--</tspan></text>
+    </g>
+    <g transform="translate(600 1560)">
+      <use href="#i-speed-move" transform="translate(0 -36)"/>
+      <text x="96" y="10"><tspan id="value_speed_moving">--</tspan></text>
+    </g>
+
+    <!-- row 2 -->
+    <g transform="translate(120 1660)">
+      <use href="#i-bolt" transform="translate(0 -36)"/>
+      <text x="96" y="10"><tspan id="value_speed_max">--</tspan></text>
+    </g>
+    <g transform="translate(600 1660)">
+      <use href="#i-play" transform="translate(0 -36)"/>
+      <text x="96" y="10"><tspan id="value_moving_time">--</tspan></text>
+    </g>
+
+    <!-- row 3 -->
+    <g transform="translate(120 1760)">
+      <use href="#i-down" transform="translate(0 -36)"/>
+      <text x="96" y="10"><tspan id="value_downhill">--</tspan></text>
+    </g>
+    <g transform="translate(600 1760)">
+      <use href="#i-peak" transform="translate(0 -36)"/>
+      <text x="96" y="10"><tspan id="value_elevation_max">--</tspan></text>
+    </g>
+
+    <!-- row 4 -->
+    <g transform="translate(120 1860)">
+      <use href="#i-valley" transform="translate(0 -36)"/>
+      <text x="96" y="10"><tspan id="value_elevation_min">--</tspan></text>
+    </g>
+  </g>
+</svg>

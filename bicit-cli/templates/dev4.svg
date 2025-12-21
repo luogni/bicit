@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1080"
+   height="1080"
+   viewBox="0 0 285.75001 285.74999"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   sodipodi:docname="dev3.svg">
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-3"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-1" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-9"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-2" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-4"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-8" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-2"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-6" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-90"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-9" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-7"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-67" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-29"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-3" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-6"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-38" />
+    </filter>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="423.03567"
+       height="723.0357"
+       patternTransform="translate(638.48219,18.482131)"
+       id="pattern4121">
+      <rect
+         style="display:inline;fill:#6be500;fill-opacity:0.350467;stroke:#27f415;stroke-width:3.0357;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.0357, 3.0357;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect3887-3"
+         width="419.99997"
+         height="720"
+         x="1.5178488"
+         y="1.5178488" />
+    </pattern>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4566"
+       x="-6.8085343e-07"
+       width="1.0000014"
+       y="-5.0525014e-06"
+       height="1.0000101">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="7.8061736e-05"
+         id="feGaussianBlur4568" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4570"
+       x="-0.0084"
+       width="1.0168"
+       y="-0.0084"
+       height="1.0168">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.000125"
+         id="feGaussianBlur4572" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4598"
+       x="-3.3994494e-05"
+       width="1.000068"
+       y="-0.00021752966"
+       height="1.0004351">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.00029020895"
+         id="feGaussianBlur4600" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.82"
+     inkscape:cx="581.82042"
+     inkscape:cy="546.97546"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     inkscape:window-width="1902"
+     inkscape:window-height="1037"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="true"
+     units="px"
+     inkscape:lockguides="false"
+     inkscape:snap-bbox="false"
+     inkscape:snap-global="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid32"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#c850c8;stroke-width:0.799999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:0.799999, 0.799999;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4570)"
+       id="rect4099"
+       width="285.75"
+       height="285.75"
+       x="0"
+       y="0" />
+    <image
+       sodipodi:absref="/home/luogni/Progetti/bicit/map.png"
+       xlink:href="../map.png"
+       width="275.16666"
+       height="275.16666"
+       preserveAspectRatio="none"
+       id="image_map"
+       x="5.2916665"
+       y="5.2916665" />
+    <rect
+       style="display:inline;fill:#c850c8;fill-opacity:0.25;stroke:#c850c8;stroke-width:0.29084;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4126"
+       width="275.16187"
+       height="44.976753"
+       x="5.2940803"
+       y="5.2940803" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.2;stroke-opacity:0.2;paint-order:stroke"
+       x="16"
+       y="34"><tspan
+         id="value_track_name">--</tspan></text>
+    <path
+       style="opacity:0.800489;fill:#c850c8;fill-opacity:1;stroke:#c850c8;stroke-width:0.396;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4566)"
+       d="M 5.2916667,280.49695 280.45833,243.41667"
+       id="path_elevation" />
+    <rect
+       style="fill:none;fill-opacity:0.350467;stroke:#c850c8;stroke-width:0.554322;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3887-3-0"
+       width="275.16666"
+       height="275.16669"
+       x="5.2916665"
+       y="5.2916636" />
+    <g
+       id="g5154"
+       transform="translate(-3.1035823e-7,-2.3305116)">
+      <g
+         id="g5128">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="48.184341"
+           y="16.481997"
+           id="text_distanza"><tspan
+             sodipodi:role="line"
+             id="value_distance"
+             x="48.184341"
+             y="16.481997"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178)"
+           x="94.31572"
+           y="14.601912"
+           id="text16"
+           transform="matrix(1.8705635,0,0,1.8705635,-166.54367,-10.806935)"><tspan
+             sodipodi:role="line"
+             id="tspan14"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Distanza</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18" /></text>
+      </g>
+      <g
+         id="g5121"
+         transform="translate(0,0.00960105)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:2.83024px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter4598)"
+           x="125.29034"
+           y="11.40638"
+           id="text3523"
+           transform="matrix(1.7450405,0,0,1.7450405,-170.40851,6.0429689)"><tspan
+             sodipodi:role="line"
+             x="125.29034"
+             y="11.40638"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:2.83024px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="value_time">04:41:32</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178)"
+           x="94.31572"
+           y="14.601912"
+           id="text3529"
+           transform="matrix(1.8705635,0,0,1.8705635,-166.54452,-1.3402448)"><tspan
+             sodipodi:role="line"
+             id="tspan3525"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Durata</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan3527" /></text>
+      </g>
+      <g
+         id="g5114">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="48.278053"
+           y="45.51305"
+           id="text_distanza-9"><tspan
+             sodipodi:role="line"
+             id="value_moving_time"
+             x="48.278053"
+             y="45.51305"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">20.0km</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-3)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-0"
+           transform="matrix(1.8705635,0,0,1.8705635,-166.5428,18.22444)"><tspan
+             sodipodi:role="line"
+             id="tspan14-6"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Durata mov</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-8" /></text>
+      </g>
+      <g
+         id="g5107"
+         transform="translate(0,-0.19709157)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="48.184341"
+           y="35.992626"
+           id="text_distanza-6"><tspan
+             sodipodi:role="line"
+             id="value_speed"
+             x="48.184341"
+             y="35.992626"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-9)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-9"
+           transform="matrix(1.8705635,0,0,1.8705635,-166.24476,8.7036427)"><tspan
+             sodipodi:role="line"
+             id="tspan14-5"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Velocità</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-0" /></text>
+      </g>
+    </g>
+    <g
+       id="g5314"
+       transform="translate(55.655774,-0.86624983)">
+      <g
+         id="g5267"
+         transform="translate(0,-0.69785485)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="210.62584"
+           y="15.540566"
+           id="text_distanza-08"><tspan
+             sodipodi:role="line"
+             id="value_elevation_max"
+             x="210.62584"
+             y="15.540566"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-29)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-5"
+           transform="matrix(1.8705635,0,0,1.8705635,-9.0253389,-11.748234)"><tspan
+             sodipodi:role="line"
+             id="tspan14-0"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Altezza max</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-9" /></text>
+      </g>
+      <g
+         id="g5274"
+         transform="translate(0,-6.0876166)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="210.62584"
+           y="30.860464"
+           id="text_distanza-61"><tspan
+             sodipodi:role="line"
+             id="value_elevation_min"
+             x="210.62584"
+             y="30.860464"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-6)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-98"
+           transform="matrix(1.8705635,0,0,1.8705635,-9.0253699,2.7152288)"><tspan
+             sodipodi:role="line"
+             id="tspan14-4"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Altezza min</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-81" /></text>
+      </g>
+    </g>
+    <g
+       id="g5300"
+       transform="translate(29.562995,-0.74449411)">
+      <g
+         id="g5224"
+         transform="translate(0,-0.33568347)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="137.01511"
+           y="15.300151"
+           id="text_distanza-1"><tspan
+             sodipodi:role="line"
+             id="value_speed_moving"
+             x="137.01511"
+             y="15.300151"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-4)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-2"
+           transform="matrix(1.8705635,0,0,1.8705635,-86.087284,-11.988833)"><tspan
+             sodipodi:role="line"
+             id="tspan14-7"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Velocità mov</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-2" /></text>
+      </g>
+      <g
+         id="g5231"
+         transform="translate(0,-6.4634997)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="137.01511"
+           y="31.270565"
+           id="text_distanza-0"><tspan
+             sodipodi:role="line"
+             id="value_speed_max"
+             x="137.01511"
+             y="31.270565"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-2)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-1"
+           transform="matrix(1.8705635,0,0,1.8705635,-86.087284,3.1253301)"><tspan
+             sodipodi:role="line"
+             id="tspan14-59"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Velocità max</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-4" /></text>
+      </g>
+      <g
+         id="g5238"
+         transform="translate(0,-1.8104857)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="137.01511"
+           y="45.737518"
+           id="text_distanza-7"><tspan
+             sodipodi:role="line"
+             id="value_uphill"
+             x="137.01511"
+             y="45.737518"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-90)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-15"
+           transform="matrix(1.8705635,0,0,1.8705635,-86.087284,17.592281)"><tspan
+             sodipodi:role="line"
+             id="tspan14-9"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Ascesa</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-7" /></text>
+      </g>
+      <g
+         id="g5217"
+         transform="translate(0,-25.850662)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.461708"
+           x="137.01511"
+           y="60.431889"
+           id="text_distanza-65"><tspan
+             sodipodi:role="line"
+             id="value_downhill"
+             x="137.01511"
+             y="60.431889"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.461708">132</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;line-height:1.25;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;opacity:0.985179;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-7)"
+           x="94.31572"
+           y="14.601912"
+           id="text16-94"
+           transform="matrix(1.8705635,0,0,1.8705635,-86.087284,32.286654)"><tspan
+             sodipodi:role="line"
+             id="tspan14-8"
+             x="94.31572"
+             y="14.601912"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583">Discesa</tspan><tspan
+             sodipodi:role="line"
+             x="94.31572"
+             y="17.902311"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.64032px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+             id="tspan18-1" /></text>
+      </g>
+    </g>
+  </g>
+</svg>

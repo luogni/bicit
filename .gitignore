@@ -1,0 +1,5 @@
+/target/
+/bicit-cli/*.png
+/bicit-cli/*.svg
+/bicit-cli/out/
+/bicit-cli/target/

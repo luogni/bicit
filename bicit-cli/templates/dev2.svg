@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1080"
+   height="1080"
+   viewBox="0 0 285.75001 285.74999"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="dev2.svg">
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-3"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-1" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-9"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-2" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-4"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-8" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-2"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-6" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-90"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-9" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-7"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-67" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-29"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-3" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter3178-6"
+       x="-0.00014008969"
+       width="1.0002801"
+       y="-0.00075233018"
+       height="1.0015047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.0025675425"
+         id="feGaussianBlur3180-38" />
+    </filter>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="423.03567"
+       height="723.0357"
+       patternTransform="translate(638.48219,18.482131)"
+       id="pattern4121">
+      <rect
+         style="display:inline;fill:#6be500;fill-opacity:0.350467;stroke:#27f415;stroke-width:3.0357;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.0357, 3.0357;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect3887-3"
+         width="419.99997"
+         height="720"
+         x="1.5178488"
+         y="1.5178488" />
+    </pattern>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4536"
+       x="-0.011936842"
+       width="1.0238737"
+       y="-0.0051545455"
+       height="1.0103091">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50006252"
+         id="feGaussianBlur4538" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.69665275"
+     inkscape:cx="555.80894"
+     inkscape:cy="582.56482"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     inkscape:window-width="1900"
+     inkscape:window-height="1017"
+     inkscape:window-x="8"
+     inkscape:window-y="1108"
+     inkscape:window-maximized="1"
+     inkscape:snap-grids="true"
+     units="px"
+     inkscape:lockguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid32"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#27f415;stroke-width:0.799999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:0.799999, 0.799999;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4099"
+       width="285.75"
+       height="285.75"
+       x="0"
+       y="0" />
+    <image
+       sodipodi:absref="/home/luogni/Progetti/bicit/1617176023488-map.png"
+       xlink:href="../1617176023488-map.png"
+       width="169.33333"
+       height="232.83333"
+       preserveAspectRatio="none"
+       id="image_map"
+       x="5.2916665"
+       y="5.2916665" />
+    <rect
+       style="opacity:0.35;fill:#ffffff;fill-opacity:1;stroke:none"
+       width="169.33333"
+       height="12"
+       x="5.2916665"
+       y="5.2916665" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.5px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.6;stroke-opacity:0.15;paint-order:stroke"
+       x="8.5"
+       y="14.5"><tspan
+         id="value_track_name">--</tspan></text>
+    <g
+       id="g3501"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,-2.7240852)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza"><tspan
+           sodipodi:role="line"
+           id="value_distance"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178)"
+         x="94.31572"
+         y="14.601912"
+         id="text16"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Distanza</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18" /></text>
+    </g>
+    <path
+       style="fill:#505050;fill-opacity:1;stroke:#454545;stroke-width:0.396;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 5.2916667,280.49695 280.45833,243.41667"
+       id="path_elevation" />
+    <g
+       id="g3531"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,11.993141)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text3523"><tspan
+           sodipodi:role="line"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583"
+           id="value_time">04:41:32</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178)"
+         x="94.31572"
+         y="14.601912"
+         id="text3529"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan3525"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Durata</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan3527" /></text>
+    </g>
+    <g
+       id="g3501-4"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,26.710369)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-9"><tspan
+           sodipodi:role="line"
+           id="value_moving_time"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">20.0km</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-3)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-0"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-6"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Durata mov</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-8" /></text>
+    </g>
+    <g
+       id="g3501-6"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,41.427595)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-6"><tspan
+           sodipodi:role="line"
+           id="value_speed"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-9)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-9"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-5"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Velocità</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-0" /></text>
+    </g>
+    <g
+       id="g3501-7"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,56.144815)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-1"><tspan
+           sodipodi:role="line"
+           id="value_speed_moving"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-4)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-2"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-7"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Velocità mov</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-2" /></text>
+    </g>
+    <g
+       id="g3501-1"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,70.862045)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-0"><tspan
+           sodipodi:role="line"
+           id="value_speed_max"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-2)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-1"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-59"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Velocità max</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-4" /></text>
+    </g>
+    <g
+       id="g3501-17"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,85.579277)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-7"><tspan
+           sodipodi:role="line"
+           id="value_uphill"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-90)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-15"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-9"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Ascesa</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-7" /></text>
+    </g>
+    <g
+       id="g3501-3"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,100.29651)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-65"><tspan
+           sodipodi:role="line"
+           id="value_downhill"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-7)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-94"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-8"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Discesa</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-1" /></text>
+    </g>
+    <g
+       id="g3501-9"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,115.01375)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-08"><tspan
+           sodipodi:role="line"
+           id="value_elevation_max"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-29)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-5"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-0"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Altezza max</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-9" /></text>
+    </g>
+    <g
+       id="g3501-5"
+       style="opacity:0.985179"
+       transform="matrix(1.7450405,0,0,1.7450405,20.884348,129.73098)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         x="125.29034"
+         y="11.40638"
+         id="text_distanza-61"><tspan
+           sodipodi:role="line"
+           id="value_elevation_min"
+           x="125.29034"
+           y="11.40638"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';stroke-width:0.264583">132</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:3.94926px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;filter:url(#filter3178-6)"
+         x="94.31572"
+         y="14.601912"
+         id="text16-98"
+         transform="matrix(1.0719313,0,0,1.0719313,-7.7804012,-4.7223207)"><tspan
+           sodipodi:role="line"
+           id="tspan14-4"
+           x="94.31572"
+           y="14.601912"
+           style="font-size:3.94926px;stroke-width:0.264583">Altezza min</tspan><tspan
+           sodipodi:role="line"
+           x="94.31572"
+           y="19.538486"
+           style="font-size:3.94926px;stroke-width:0.264583"
+           id="tspan18-81" /></text>
+    </g>
+    <rect
+       style="fill:none;stroke:none"
+       transform="scale(0.26458333)"
+       width="423.03568"
+       height="723.03571"
+       x="638.48218"
+       y="18.48213"
+       id="rect4124" />
+    <rect
+       style="fill:none;fill-opacity:0.350467;stroke:#454545;stroke-width:0.4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3887-3-0"
+       width="169.33333"
+       height="232.83334"
+       x="5.2916665"
+       y="5.2916636" />
+    <rect
+       style="display:inline;fill:#505050;fill-opacity:0.35;stroke:#454545;stroke-width:0.4;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4126"
+       width="100.54167"
+       height="232.83334"
+       x="179.91667"
+       y="5.2916613" />
+    <use
+       x="0"
+       y="0"
+       xlink:href="#rect4126"
+       id="use4514"
+       width="100%"
+       height="100%"
+       transform="matrix(2.736842,0,0,0.1590909,-487.11183,242.57481)"
+       style="filter:url(#filter4536)" />
+  </g>
+</svg>

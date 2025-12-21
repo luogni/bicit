@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1080"
+  height="1920"
+  viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B1220" />
+      <stop offset="1" stop-color="#05070C" />
+    </linearGradient>
+    <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0.15" />
+      <stop offset="1" stop-color="#000" stop-opacity="0.70" />
+    </linearGradient>
+    <filter id="glass" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-opacity="0.35" />
+    </filter>
+
+    <!-- icons -->
+    <g id="i-ring" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="18"/>
+      <circle cx="32" cy="32" r="6"/>
+    </g>
+    <g id="i-clock" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M32 18v16l11 7"/>
+    </g>
+    <g id="i-play" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="32" r="22"/>
+      <path d="M28 22v20l18-10Z"/>
+    </g>
+    <g id="i-speed" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 42c2 10 12 18 26 18s24-8 26-18"/>
+      <path d="M32 42 48 28"/>
+    </g>
+    <g id="i-speed-move" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 42c2 10 12 18 26 18s24-8 26-18"/>
+      <path d="M32 42 48 28"/>
+      <path d="M56 20v18l14-9Z"/>
+    </g>
+    <g id="i-bolt" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M28 6 12 34h16l-4 24 20-30H30z"/>
+    </g>
+    <g id="i-up" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 56V12"/>
+      <path d="M16 28 32 12 48 28"/>
+    </g>
+    <g id="i-down" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 8v44"/>
+      <path d="M16 36 32 52 48 36"/>
+    </g>
+    <g id="i-peak" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 56 30 20 50 56"/>
+      <path d="M30 36 36 28 42 36"/>
+      <path d="M62 54V18"/>
+      <path d="M54 26 62 18 70 26"/>
+    </g>
+    <g id="i-valley" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 56 30 20 50 56"/>
+      <path d="M30 36 36 28 42 36"/>
+      <path d="M62 18v36"/>
+      <path d="M54 46 62 54 70 46"/>
+    </g>
+  </defs>
+
+  <rect width="1080" height="1920" fill="url(#bg)" />
+
+  <!-- Map as full background -->
+  <image
+    id="image_map"
+    x="0" y="0" width="1080" height="1920"
+    preserveAspectRatio="xMidYMid slice"
+    xlink:href="../map.png" />
+  <rect width="1080" height="1920" fill="url(#scrim)" />
+
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="900" font-size="54" fill="#FFFFFF">
+    <text x="80" y="150" style="paint-order:stroke;stroke:#000000;stroke-width:10;stroke-opacity:0.35"><tspan id="value_track_name">--</tspan></text>
+  </g>
+
+  <!-- Elevation as a soft accent near bottom -->
+  <path id="path_elevation" d="M 80,1640 1000,1420" fill="none" stroke="#60A5FA" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+
+  <!-- Floating glass panel -->
+  <g filter="url(#glass)">
+    <rect x="80" y="250" width="920" height="1260" rx="56" fill="#FFFFFF" opacity="0.10" />
+    <rect x="80" y="250" width="920" height="1260" rx="56" fill="none" stroke="#FFFFFF" opacity="0.20" stroke-width="2"/>
+  </g>
+
+  <!-- Stat grid: 2 columns x 5 rows, centered -->
+  <g font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-weight="700" font-size="54" fill="#FFFFFF">
+    <g transform="translate(140 340)">
+      <use href="#i-ring"/>
+      <text x="90" y="48"><tspan id="value_distance">--</tspan></text>
+    </g>
+    <g transform="translate(580 340)">
+      <use href="#i-clock"/>
+      <text x="90" y="48"><tspan id="value_time">--</tspan></text>
+    </g>
+
+    <g transform="translate(140 520)">
+      <use href="#i-play"/>
+      <text x="90" y="48"><tspan id="value_moving_time">--</tspan></text>
+    </g>
+    <g transform="translate(580 520)">
+      <use href="#i-speed"/>
+      <text x="90" y="48"><tspan id="value_speed">--</tspan></text>
+    </g>
+
+    <g transform="translate(140 700)">
+      <use href="#i-speed-move"/>
+      <text x="90" y="48"><tspan id="value_speed_moving">--</tspan></text>
+    </g>
+    <g transform="translate(580 700)">
+      <use href="#i-bolt"/>
+      <text x="90" y="48"><tspan id="value_speed_max">--</tspan></text>
+    </g>
+
+    <g transform="translate(140 880)">
+      <use href="#i-up"/>
+      <text x="90" y="48"><tspan id="value_uphill">--</tspan></text>
+    </g>
+    <g transform="translate(580 880)">
+      <use href="#i-down"/>
+      <text x="90" y="48"><tspan id="value_downhill">--</tspan></text>
+    </g>
+
+    <g transform="translate(140 1060)">
+      <use href="#i-peak"/>
+      <text x="90" y="48"><tspan id="value_elevation_max">--</tspan></text>
+    </g>
+    <g transform="translate(580 1060)">
+      <use href="#i-valley"/>
+      <text x="90" y="48"><tspan id="value_elevation_min">--</tspan></text>
+    </g>
+  </g>
+</svg>
