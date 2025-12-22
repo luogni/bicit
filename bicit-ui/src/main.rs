@@ -1,10 +1,15 @@
 use bicit::context;
 use bicit::map;
+use galileo::MapView;
 use galileo::layer::raster_tile_layer::RasterTileLayerBuilder;
 use galileo::{Map, MapBuilder};
 use galileo_egui::{EguiMap, EguiMapState};
+use galileo_types::cartesian::CartesianPoint2d;
+use galileo_types::geo::Crs;
 use galileo_types::geo::GeoPoint;
+use galileo_types::geo::NewGeoPoint;
 use galileo_types::geo::impls::GeoPoint2d;
+use std::time::Duration;
 
 const STORAGE_KEY: &str = "galileo_egui_app_example";
 
@@ -32,21 +37,21 @@ impl EguiMapApp {
         let initial_resolution = egui_map_state.map().view().resolution();
 
         // Try to get stored values or use initial values
-        let AppStorage {
-            position,
-            resolution,
-        } = cc
-            .storage
-            .and_then(|storage| eframe::get_value(storage, STORAGE_KEY))
-            .unwrap_or(AppStorage {
-                position: initial_position,
-                resolution: initial_resolution,
-            });
-
+        // let AppStorage {
+        // position,
+        // resolution,
+        // } = cc
+        // .storage
+        // .and_then(|storage| eframe::get_value(storage, STORAGE_KEY))
+        // .unwrap_or(AppStorage {
+        // position: initial_position,
+        // resolution: initial_resolution,
+        // });
+        //
         Self {
             map: egui_map_state,
-            position,
-            resolution,
+            position: initial_position,
+            resolution: initial_resolution,
         }
     }
 }
@@ -54,6 +59,10 @@ impl EguiMapApp {
 impl eframe::App for EguiMapApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
+            if self.resolution < 2.0 {
+                self.resolution = 2.0;
+            }
+
             EguiMap::new(&mut self.map)
                 .with_position(&mut self.position)
                 .with_resolution(&mut self.resolution)
@@ -83,6 +92,19 @@ impl eframe::App for EguiMapApp {
                         self.map.map_mut().layers_mut().remove(1);
                         self.map.map_mut().layers_mut().remove(1);
                     }
+                    let extent = layers.outline.extent_projected(&Crs::EPSG3857);
+                    println!("{:?}", extent);
+
+                    if let Some(a) = extent {
+                        let center = a.center();
+                        println!("{:?}", center);
+                        // Preserve the current view's size when creating target view
+                        let current_size = self.map.map().view().size();
+                        self.map.map_mut().animate_to(
+                            MapView::new_projected(&center, 7.0).with_size(current_size),
+                            Duration::new(0, 400_000_000),
+                        );
+                    }
                     self.map.map_mut().layers_mut().push(layers.outline);
                     self.map.map_mut().layers_mut().push(layers.inner);
                 }
@@ -107,9 +129,15 @@ impl eframe::App for EguiMapApp {
 fn main() {
     let map = create_map();
 
+    let options = eframe::NativeOptions {
+        viewport: egui::ViewportBuilder::default().with_fullscreen(false),
+        ..Default::default()
+    };
+
     galileo_egui::InitBuilder::new(map)
         .with_app_builder(|egui_map_state, cc| Box::new(EguiMapApp::new(egui_map_state, cc)))
-        .with_app_name("galileo egui app")
+        .with_native_options(options)
+        .with_app_name("Bicit-ui")
         .init()
         .expect("failed to initialize");
 }
