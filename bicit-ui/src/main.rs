@@ -70,6 +70,22 @@ impl eframe::App for EguiMapApp {
                 ui.separator();
                 ui.label("Map resolution:");
                 ui.label(format!("{:6}", self.resolution));
+                if ui.button("Open file").clicked()
+                    && let Some(path) = rfd::FileDialog::new().pick_file()
+                {
+                    let mut ctx = context::Context::new(path.to_str().unwrap());
+                    ctx.load().unwrap();
+                    let data = ctx.get_data().unwrap();
+
+                    let layers = map::get_layers(&data.coords, None);
+
+                    if self.map.map().layers().len() > 1 {
+                        self.map.map_mut().layers_mut().remove(1);
+                        self.map.map_mut().layers_mut().remove(1);
+                    }
+                    self.map.map_mut().layers_mut().push(layers.outline);
+                    self.map.map_mut().layers_mut().push(layers.inner);
+                }
             });
         });
     }
@@ -114,18 +130,9 @@ fn create_map() -> Map {
         .build()
         .expect("failed to create layer");
 
-    let mut ctx = bicit::context::Context::new("./bicit/test/t1.gpx");
-    ctx.load().unwrap();
-    let data = ctx.get_data().unwrap();
-
-    let layers = bicit::map::get_layers(&data.coords, None);
-
-    let map = MapBuilder::default()
+    MapBuilder::default()
         .with_latlon(37.566, 128.9784)
         .with_z_level(8)
         .with_layer(layer)
-        .with_layer(layers.outline)
-        .with_layer(layers.inner)
-        .build();
-    map
+        .build()
 }
