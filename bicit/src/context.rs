@@ -38,8 +38,8 @@ pub struct ContextData {
     pub coords: Vec<Point<f64>>,
 }
 
-pub struct Context<'a> {
-    filename: &'a str,
+pub struct Context {
+    filename: String,
 
     data: Option<ContextData>,
     map_href: RefCell<Option<String>>,
@@ -47,10 +47,10 @@ pub struct Context<'a> {
     map_track_color: RefCell<Option<galileo::Color>>,
 }
 
-impl Context<'_> {
-    pub fn new(filename: &str) -> Context<'_> {
+impl Context {
+    pub fn new(filename: impl Into<String>) -> Context {
         Context {
-            filename,
+            filename: filename.into(),
             data: None,
             map_href: RefCell::new(None),
             map_size: RefCell::new(None),
@@ -199,7 +199,7 @@ impl Context<'_> {
     }
 
     pub fn load(&mut self) -> Result<()> {
-        let file = File::open(self.filename)?;
+        let file = File::open(&self.filename)?;
         let reader = BufReader::new(file);
 
         let mut tot_distance: f64 = 0.0;
@@ -215,7 +215,7 @@ impl Context<'_> {
         let mut coords: Vec<Point<f64>> = vec![];
 
         let gpx = read(reader)?;
-        let track_name = Context::compute_track_name(&gpx, self.filename);
+        let track_name = Context::compute_track_name(&gpx, &self.filename);
         for t in gpx.tracks {
             let mls: MultiLineString<f64> = t.multilinestring();
             tot_distance += Geodesic.length(&mls);

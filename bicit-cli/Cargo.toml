@@ -7,19 +7,4 @@ edition = "2024"
 [dependencies]
 clap = { version = "4.5.53", features = ["derive"] }
 anyhow = "1.0.100"
-quick-xml = "0.38.4"
-gpx = "0.10.0"
-geo = "0.32.0"
-geo-types = "0.7.18"
-chrono = "0.4.42"
-assert_approx_eq = "1.1.0"
-hhmmss = "0.1.0"
-time = "0.3.44"
-base64 = "0.22.1"
-
-# Map rendering (use git main, not crates.io release)
-galileo = { git = "https://github.com/galileo-map/galileo", package = "galileo" }
-galileo-types = { git = "https://github.com/galileo-map/galileo", package = "galileo-types" }
-image = { version = "0.25.9", default-features = false, features = ["png"] }
-tokio = { version = "1.48.0", features = ["rt-multi-thread"] }
 bicit = { version = "0.1.0", path = "../bicit" }
