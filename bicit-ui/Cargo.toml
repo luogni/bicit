@@ -15,3 +15,5 @@ serde = "1.0.228"
 tokio = { version = "1.45.0", features = ["rt-multi-thread"] }
 bicit = { version = "0.1.0", path = "../bicit" }
 rfd = "0.16.0"
+anyhow = "1.0.100"
+egui-toast = "0.19.1"

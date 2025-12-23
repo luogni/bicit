@@ -602,9 +602,11 @@ dependencies = [
 name = "bicit-ui"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "bicit",
  "eframe",
  "egui",
+ "egui-toast",
  "galileo",
  "galileo-egui",
  "galileo-types",
@@ -1334,6 +1336,15 @@ dependencies = [
  "serde",
  "smallvec",
  "unicode-segmentation",
+]
+
+[[package]]
+name = "egui-toast"
+version = "0.19.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2d70ffb0cc3f04ee54e4ce7a202bbbe2bc10020fa9287d10812cda8c92b033f2"
+dependencies = [
+ "egui",
 ]
 
 [[package]]

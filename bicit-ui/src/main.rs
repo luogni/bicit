@@ -1,14 +1,17 @@
+use anyhow::Context;
+use anyhow::{Result, anyhow};
 use bicit::context;
 use bicit::map;
+use egui::{Align2, Direction, Pos2};
+use egui_toast::{Toast, ToastKind, Toasts};
 use galileo::MapView;
 use galileo::layer::raster_tile_layer::RasterTileLayerBuilder;
 use galileo::{Map, MapBuilder};
 use galileo_egui::{EguiMap, EguiMapState};
-use galileo_types::cartesian::CartesianPoint2d;
 use galileo_types::geo::Crs;
 use galileo_types::geo::GeoPoint;
-use galileo_types::geo::NewGeoPoint;
 use galileo_types::geo::impls::GeoPoint2d;
+use std::path::PathBuf;
 use std::time::Duration;
 
 const STORAGE_KEY: &str = "galileo_egui_app_example";
@@ -54,6 +57,33 @@ impl EguiMapApp {
             resolution: initial_resolution,
         }
     }
+
+    fn load_new_layers(&mut self, ctx: &egui::Context, path: PathBuf) -> Result<()> {
+        let mut ctx = context::Context::new(path.to_str().ok_or(anyhow!("Can't parse path"))?);
+        ctx.load()?;
+        let data = ctx.get_data().context("failed getting context")?;
+
+        let layers = map::get_layers(&data.coords, None);
+
+        if self.map.map().layers().len() > 1 {
+            self.map.map_mut().layers_mut().remove(1);
+            self.map.map_mut().layers_mut().remove(1);
+        }
+        let extent = layers.outline.extent_projected(&Crs::EPSG3857);
+
+        if let Some(a) = extent {
+            let center = a.center();
+            // Preserve the current view's size when creating target view
+            let current_size = self.map.map().view().size();
+            self.map.map_mut().animate_to(
+                MapView::new_projected(&center, 7.0).with_size(current_size),
+                Duration::new(0, 400_000_000),
+            );
+        }
+        self.map.map_mut().layers_mut().push(layers.outline);
+        self.map.map_mut().layers_mut().push(layers.inner);
+        Ok(())
+    }
 }
 
 impl eframe::App for EguiMapApp {
@@ -79,35 +109,17 @@ impl eframe::App for EguiMapApp {
                 ui.separator();
                 ui.label("Map resolution:");
                 ui.label(format!("{:6}", self.resolution));
+                let mut toasts = Toasts::new()
+                    .anchor(Align2::LEFT_TOP, Pos2::new(10.0, 10.0))
+                    .direction(Direction::TopDown);
                 if ui.button("Open file").clicked()
                     && let Some(path) = rfd::FileDialog::new().pick_file()
                 {
-                    let mut ctx = context::Context::new(path.to_str().unwrap());
-                    ctx.load().unwrap();
-                    let data = ctx.get_data().unwrap();
-
-                    let layers = map::get_layers(&data.coords, None);
-
-                    if self.map.map().layers().len() > 1 {
-                        self.map.map_mut().layers_mut().remove(1);
-                        self.map.map_mut().layers_mut().remove(1);
+                    if let Err(e) = self.load_new_layers(ctx, path) {
+                        toasts.add(Toast::default().kind(ToastKind::Error).text(e.to_string()));
                     }
-                    let extent = layers.outline.extent_projected(&Crs::EPSG3857);
-                    println!("{:?}", extent);
-
-                    if let Some(a) = extent {
-                        let center = a.center();
-                        println!("{:?}", center);
-                        // Preserve the current view's size when creating target view
-                        let current_size = self.map.map().view().size();
-                        self.map.map_mut().animate_to(
-                            MapView::new_projected(&center, 7.0).with_size(current_size),
-                            Duration::new(0, 400_000_000),
-                        );
-                    }
-                    self.map.map_mut().layers_mut().push(layers.outline);
-                    self.map.map_mut().layers_mut().push(layers.inner);
                 }
+                toasts.show(ctx);
             });
         });
     }
