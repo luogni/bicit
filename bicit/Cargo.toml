@@ -18,5 +18,5 @@ base64 = "0.22.1"
 # Map rendering (use git main, not crates.io release)
 galileo = { git = "https://github.com/galileo-map/galileo", package = "galileo" }
 galileo-types = { git = "https://github.com/galileo-map/galileo", package = "galileo-types" }
-image = { version = "0.24.9", default-features = false, features = ["png"] }
+image = { version = "0.25.9", default-features = false, features = ["png"] }
 tokio = "1.48.0"

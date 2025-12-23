@@ -10,9 +10,9 @@ egui = "0.33.3"
 galileo = { git = "https://github.com/galileo-map/galileo", package = "galileo" }
 galileo-types = { git = "https://github.com/galileo-map/galileo", package = "galileo-types" }
 galileo-egui = { git = "https://github.com/galileo-map/galileo", package = "galileo-egui" }
-image = { version = "0.24.9", default-features = false, features = ["png"] }
+image = { version = "0.25.9", default-features = false, features = ["png"] }
 serde = "1.0.228"
-tokio = { version = "1.45.0", features = ["rt-multi-thread"] }
+tokio = { version = "1.48.0", features = ["rt-multi-thread"] }
 bicit = { version = "0.1.0", path = "../bicit" }
 rfd = "0.16.0"
 anyhow = "1.0.100"

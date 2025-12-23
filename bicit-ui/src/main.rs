@@ -29,7 +29,7 @@ struct EguiMapApp {
 }
 
 impl EguiMapApp {
-    fn new(egui_map_state: EguiMapState, cc: &eframe::CreationContext<'_>) -> Self {
+    fn new(egui_map_state: EguiMapState, _cc: &eframe::CreationContext<'_>) -> Self {
         // get initial position from map
         let initial_position = egui_map_state
             .map()
@@ -58,7 +58,7 @@ impl EguiMapApp {
         }
     }
 
-    fn load_new_layers(&mut self, ctx: &egui::Context, path: PathBuf) -> Result<()> {
+    fn load_new_layers(&mut self, _ctx: &egui::Context, path: PathBuf) -> Result<()> {
         let mut ctx = context::Context::new(path.to_str().ok_or(anyhow!("Can't parse path"))?);
         ctx.load()?;
         let data = ctx.get_data().context("failed getting context")?;
