@@ -222,8 +222,8 @@ pub fn render_track_map_href(
 
     let layers: Vec<Box<dyn Layer>> = vec![
         Box::new(osm),
-        Box::new(track_layers.inner),
         Box::new(track_layers.outline),
+        Box::new(track_layers.inner),
     ];
 
     let map = Map::new(map_view, layers, None::<Box<dyn Messenger>>);
