@@ -6,3 +6,6 @@
 /.tile_cache/
 /bicit-cli/.tile_cache/
 bicit-ui/.tile_cache/
+out.svg
+1.gpx
+out.png

@@ -23,7 +23,7 @@ run-ui:
     cargo run -p bicit-ui
 
 # just run-sample templates/dev3.svg out
-run-sample template="templates/dev.svg" outbase="out": (run-gpx "test/t1.gpx" template outbase)
+run-sample template="../bicit/templates/dev.svg" outbase="out": (run-gpx "test/t1.gpx" template outbase)
 
 # Run with an arbitrary GPX file.
 # Example:
