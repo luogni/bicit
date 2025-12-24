@@ -1378,7 +1378,6 @@ dependencies = [
  "log",
  "mime_guess2",
  "profiling",
- "resvg",
 ]
 
 [[package]]
@@ -1892,7 +1891,7 @@ dependencies = [
 [[package]]
 name = "galileo"
 version = "0.2.1"
-source = "git+https://github.com/galileo-map/galileo#36840640e059f0116642ee5af759043473cd6f4c"
+source = "git+https://github.com/galileo-map/galileo#7111062df027e9afae2003dfb61e530d064ff7a7"
 dependencies = [
  "ahash",
  "async-trait",
@@ -1943,7 +1942,7 @@ dependencies = [
 [[package]]
 name = "galileo-egui"
 version = "0.2.1"
-source = "git+https://github.com/galileo-map/galileo#36840640e059f0116642ee5af759043473cd6f4c"
+source = "git+https://github.com/galileo-map/galileo#7111062df027e9afae2003dfb61e530d064ff7a7"
 dependencies = [
  "eframe",
  "egui",
@@ -1960,7 +1959,7 @@ dependencies = [
 [[package]]
 name = "galileo-mvt"
 version = "0.2.1"
-source = "git+https://github.com/galileo-map/galileo#36840640e059f0116642ee5af759043473cd6f4c"
+source = "git+https://github.com/galileo-map/galileo#7111062df027e9afae2003dfb61e530d064ff7a7"
 dependencies = [
  "bytes",
  "galileo-types",
@@ -1978,7 +1977,7 @@ dependencies = [
 [[package]]
 name = "galileo-types"
 version = "0.2.1"
-source = "git+https://github.com/galileo-map/galileo#36840640e059f0116642ee5af759043473cd6f4c"
+source = "git+https://github.com/galileo-map/galileo#7111062df027e9afae2003dfb61e530d064ff7a7"
 dependencies = [
  "approx",
  "geo-types",
@@ -2732,15 +2731,6 @@ name = "itertools"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b1c173a5686ce8bfa551b3563d0c2170bf24ca44da99c7ca4bfdab5418c3fe57"
-dependencies = [
- "either",
-]
-
-[[package]]
-name = "itertools"
-version = "0.12.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569"
 dependencies = [
  "either",
 ]
@@ -4085,7 +4075,7 @@ checksum = "22505a5c94da8e3b7c2996394d1c933236c4d743e81a410bcca4e6989fc066a4"
 dependencies = [
  "bytes",
  "heck 0.5.0",
- "itertools 0.12.1",
+ "itertools 0.11.0",
  "log",
  "multimap 0.10.1",
  "once_cell",
@@ -4118,7 +4108,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "81bddcdb20abf9501610992b6759a4c888aef7d1a7247ef75e2404275ac24af1"
 dependencies = [
  "anyhow",
- "itertools 0.12.1",
+ "itertools 0.11.0",
  "proc-macro2",
  "quote",
  "syn 2.0.111",
