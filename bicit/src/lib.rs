@@ -2,9 +2,10 @@ pub mod context;
 pub mod embedded_templates;
 pub mod map;
 pub mod template;
+pub mod time;
 
 pub use context::Context;
-pub use embedded_templates::{get_template_by_name, get_templates, EmbeddedTemplate};
+pub use embedded_templates::{EmbeddedTemplate, get_template_by_name, get_templates};
 pub use template::Template;
 
 use anyhow::Result;

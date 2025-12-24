@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
 
+use crate::time::get_hhmmss;
 use anyhow::Result;
 use anyhow::anyhow;
 use chrono::Duration;
@@ -10,7 +11,6 @@ use geo::algorithm::line_measures::Length;
 use geo::{Distance, Geodesic, MultiLineString};
 use geo_types::Point;
 use gpx::read;
-use hhmmss::Hhmmss;
 
 use crate::InputPath;
 use crate::map::render_track_map_href;
@@ -76,8 +76,8 @@ impl Context {
                 "value_downhill" => Some(format!("{:.0}m", d.downhill)),
                 "value_elevation_max" => Some(format!("{:.0}m", d.elevation_max)),
                 "value_elevation_min" => Some(format!("{:.0}m", d.elevation_min)),
-                "value_time" => Some(d.time.hhmmss()),
-                "value_moving_time" => Some(d.time_moving.hhmmss()),
+                "value_time" => Some(get_hhmmss(d.time)),
+                "value_moving_time" => Some(get_hhmmss(d.time_moving)),
                 _ => None,
             };
         }
