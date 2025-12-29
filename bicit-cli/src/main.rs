@@ -1,5 +1,5 @@
 use anyhow::Result;
-use bicit::{get_template_by_name, Context, Template};
+use bicit::{Context, Template, get_template_by_name};
 use bicit_cli::export_to_file;
 use clap::Parser;
 use std::fs;

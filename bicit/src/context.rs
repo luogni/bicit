@@ -1,10 +1,13 @@
 use std::cell::RefCell;
 use std::fs::File;
 use std::io::BufReader;
+use std::io::Cursor;
 use std::path::Path;
 
 use crate::time::get_hhmmss;
 use anyhow::Result;
+
+#[cfg(not(target_arch = "wasm32"))]
 use anyhow::anyhow;
 use chrono::Duration;
 use geo::algorithm::line_measures::Length;
@@ -13,6 +16,8 @@ use geo_types::Point;
 use gpx::read;
 
 use crate::InputPath;
+
+#[cfg(not(target_arch = "wasm32"))]
 use crate::map::render_track_map_href;
 
 #[derive(Debug)]
@@ -64,6 +69,10 @@ impl Context {
         self.map_track_color.borrow_mut().take();
     }
 
+    pub fn coords(&self) -> Option<&[Point<f64>]> {
+        self.data.as_ref().map(|d| d.coords.as_slice())
+    }
+
     pub fn get_string(&self, k: &str) -> Option<String> {
         if let Some(d) = &self.data {
             return match k {
@@ -84,6 +93,7 @@ impl Context {
         None
     }
 
+    #[cfg(not(target_arch = "wasm32"))]
     fn build_map(&self, w_px: u32, h_px: u32, track_color: Option<galileo::Color>) -> Result<()> {
         let d = self
             .data
@@ -102,6 +112,7 @@ impl Context {
         Ok(())
     }
 
+    #[cfg(not(target_arch = "wasm32"))]
     pub fn get_image(
         &self,
         k: &str,
@@ -127,6 +138,17 @@ impl Context {
             };
         }
 
+        None
+    }
+
+    #[cfg(target_arch = "wasm32")]
+    pub fn get_image(
+        &self,
+        _k: &str,
+        _w_px: u32,
+        _h_px: u32,
+        _track_color: Option<galileo::Color>,
+    ) -> Option<String> {
         None
     }
 
@@ -201,7 +223,15 @@ impl Context {
     pub fn load(&mut self) -> Result<()> {
         let file = File::open(&self.filename)?;
         let reader = BufReader::new(file);
+        self.load_from_bufread(reader)
+    }
 
+    pub fn load_from_bytes(&mut self, bytes: &[u8]) -> Result<()> {
+        let reader = BufReader::new(Cursor::new(bytes));
+        self.load_from_bufread(reader)
+    }
+
+    fn load_from_bufread<R: std::io::BufRead>(&mut self, reader: R) -> Result<()> {
         let mut tot_distance: f64 = 0.0;
         let mut cur_distance: f64 = 0.0;
         let mut tot_time: Duration = Duration::seconds(0);

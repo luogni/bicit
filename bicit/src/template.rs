@@ -6,8 +6,54 @@ use quick_xml::events::{BytesStart, BytesText, Event};
 use quick_xml::name::QName;
 use std::io::Cursor;
 
-use crate::context::Context;
 use crate::InputPath;
+use crate::context::Context;
+
+pub const TRANSPARENT_PNG_DATA_URL: &str = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO6qP6cAAAAASUVORK5CYII=";
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct MapImageRequest {
+    pub w_px: u32,
+    pub h_px: u32,
+    pub track_color: Option<Color>,
+}
+
+pub trait ValueProvider {
+    fn get_string(&self, k: &str) -> Option<String>;
+    fn get_path(&self, k: &str, inp: &InputPath) -> Option<String>;
+}
+
+pub trait AssetProvider {
+    fn get_image(
+        &self,
+        id: &str,
+        w_px: u32,
+        h_px: u32,
+        track_color: Option<Color>,
+    ) -> Option<String>;
+}
+
+impl ValueProvider for Context {
+    fn get_string(&self, k: &str) -> Option<String> {
+        Context::get_string(self, k)
+    }
+
+    fn get_path(&self, k: &str, inp: &InputPath) -> Option<String> {
+        Context::get_path(self, k, inp)
+    }
+}
+
+impl AssetProvider for Context {
+    fn get_image(
+        &self,
+        id: &str,
+        w_px: u32,
+        h_px: u32,
+        track_color: Option<Color>,
+    ) -> Option<String> {
+        Context::get_image(self, id, w_px, h_px, track_color)
+    }
+}
 
 #[derive(Debug, Copy, Clone)]
 struct SvgMetrics {
@@ -96,9 +142,26 @@ impl Template {
         &self.content
     }
 
-    /// Apply context data to the template and return the resulting SVG string
+    /// Apply context data to the template and return the resulting SVG string.
+    ///
+    /// This is the legacy, synchronous rendering entry point. It uses `Context` as both
+    /// the value source and image asset source.
     pub fn apply_context(&self, context: &Context) -> Result<String> {
-        Ok(Template::apply_context_xml(&self.content, context))
+        self.apply_with(context, context)
+    }
+
+    /// Apply template using separate value and asset providers.
+    pub fn apply_with<V: ValueProvider, A: AssetProvider>(
+        &self,
+        values: &V,
+        assets: &A,
+    ) -> Result<String> {
+        Ok(Template::apply_with_xml(&self.content, values, assets))
+    }
+
+    /// Extract the desired `image_map` render request for this template.
+    pub fn desired_map_image_request(&self) -> Option<MapImageRequest> {
+        Template::desired_map_image_request_xml(&self.content)
     }
 
     fn get_attribute(e: &BytesStart, name: &[u8]) -> Option<String> {
@@ -173,9 +236,10 @@ impl Template {
         None
     }
 
-    fn handle_xml(
+    fn handle_xml<V: ValueProvider, A: AssetProvider>(
         e: &BytesStart,
-        context: &Context,
+        values: &V,
+        assets: &A,
         metrics: Option<&SvgMetrics>,
         track_color: Option<Color>,
     ) -> Option<String> {
@@ -183,7 +247,7 @@ impl Template {
         if let Some(id) = id_t {
             match e.name().as_ref() {
                 b"tspan" => {
-                    if let Some(v) = context.get_string(&id) {
+                    if let Some(v) = values.get_string(&id) {
                         return Some(v);
                     }
                 }
@@ -191,7 +255,7 @@ impl Template {
                     let pathd = Template::get_attribute(e, b"d");
                     if let Some(pathd_t) = pathd {
                         let inp = InputPath::new(&pathd_t).unwrap();
-                        if let Some(v) = context.get_path(&id, &inp) {
+                        if let Some(v) = values.get_path(&id, &inp) {
                             return Some(v);
                         }
                     }
@@ -217,7 +281,7 @@ impl Template {
 
                     let color_override = if id == "image_map" { track_color } else { None };
 
-                    if let Some(v) = context.get_image(&id, w_px, h_px, color_override) {
+                    if let Some(v) = assets.get_image(&id, w_px, h_px, color_override) {
                         return Some(v);
                     }
                 }
@@ -227,7 +291,87 @@ impl Template {
         None
     }
 
-    fn apply_context_xml(xml: &str, context: &Context) -> String {
+    fn desired_map_image_request_xml(xml: &str) -> Option<MapImageRequest> {
+        let mut reader = Reader::from_str(xml);
+        reader.config_mut().trim_text_start = true;
+        reader.config_mut().trim_text_end = true;
+
+        let track_color = Template::extract_track_color_from_template(xml);
+        let mut svg_metrics: Option<SvgMetrics> = None;
+
+        loop {
+            match reader.read_event() {
+                Ok(Event::Start(e)) if e.name() == QName(b"svg") => {
+                    if svg_metrics.is_none() {
+                        let svg_w = Template::get_attribute(&e, b"width");
+                        let svg_h = Template::get_attribute(&e, b"height");
+                        let view_box = Template::get_attribute(&e, b"viewBox");
+
+                        if let (Some(svg_w), Some(svg_h)) = (svg_w, svg_h) {
+                            let svg_px_w = parse_svg_length_to_px(&svg_w);
+                            let svg_px_h = parse_svg_length_to_px(&svg_h);
+
+                            let vb = view_box.as_deref().and_then(parse_viewbox).unwrap_or((
+                                0.0,
+                                0.0,
+                                svg_px_w.unwrap_or(1.0),
+                                svg_px_h.unwrap_or(1.0),
+                            ));
+
+                            if let (Some(svg_px_w), Some(svg_px_h)) = (svg_px_w, svg_px_h) {
+                                svg_metrics = Some(SvgMetrics {
+                                    svg_px_w,
+                                    svg_px_h,
+                                    viewbox_w: vb.2,
+                                    viewbox_h: vb.3,
+                                });
+                            }
+                        }
+                    }
+                }
+                Ok(Event::Start(e)) | Ok(Event::Empty(e)) if e.name() == QName(b"image") => {
+                    let Some(id) = Template::get_attribute(&e, b"id") else {
+                        continue;
+                    };
+                    if id != "image_map" {
+                        continue;
+                    }
+
+                    let wd = Template::get_attribute(&e, b"width")?;
+                    let hd = Template::get_attribute(&e, b"height")?;
+                    let w_units: f64 = wd.parse().ok()?;
+                    let h_units: f64 = hd.parse().ok()?;
+
+                    let (w_px, h_px) = match svg_metrics {
+                        Some(m) => image_pixels(&m, w_units, h_units),
+                        None => {
+                            let aspect = (w_units / h_units).max(0.0001);
+                            let w_px = 1000u32;
+                            let h_px = ((w_px as f64) / aspect).round().max(1.0) as u32;
+                            (w_px, h_px)
+                        }
+                    };
+
+                    return Some(MapImageRequest {
+                        w_px,
+                        h_px,
+                        track_color,
+                    });
+                }
+                Ok(Event::Eof) => break,
+                Ok(_) => {}
+                Err(_) => break,
+            }
+        }
+
+        None
+    }
+
+    fn apply_with_xml<V: ValueProvider, A: AssetProvider>(
+        xml: &str,
+        values: &V,
+        assets: &A,
+    ) -> String {
         let mut reader = Reader::from_str(xml);
         reader.config_mut().trim_text_start = true;
         reader.config_mut().trim_text_end = true;
@@ -273,11 +417,12 @@ impl Template {
                 }
                 Ok(Event::Start(e)) if e.name() == QName(b"tspan") => {
                     change_text =
-                        Template::handle_xml(&e, context, svg_metrics.as_ref(), track_color);
+                        Template::handle_xml(&e, values, assets, svg_metrics.as_ref(), track_color);
                     writer.write_event(Event::Start(e.to_owned())).unwrap();
                 }
                 Ok(Event::Empty(e)) if e.name() == QName(b"path") => {
-                    let pd = Template::handle_xml(&e, context, svg_metrics.as_ref(), track_color);
+                    let pd =
+                        Template::handle_xml(&e, values, assets, svg_metrics.as_ref(), track_color);
                     if let Some(pd) = pd {
                         let mut elem = BytesStart::new("path");
                         elem.extend_attributes(
@@ -292,7 +437,8 @@ impl Template {
                     }
                 }
                 Ok(Event::Empty(e)) if e.name() == QName(b"image") => {
-                    let pd = Template::handle_xml(&e, context, svg_metrics.as_ref(), track_color);
+                    let pd =
+                        Template::handle_xml(&e, values, assets, svg_metrics.as_ref(), track_color);
                     if let Some(pd) = pd {
                         let mut elem = BytesStart::new("image");
                         elem.extend_attributes(e.attributes().filter_map(|attr| attr.ok()).filter(

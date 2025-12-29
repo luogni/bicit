@@ -21,6 +21,7 @@ use galileo_types::{Disambig, MultiContour};
 use geo::Simplify;
 use geo_types::{LineString, Point};
 use image::{DynamicImage, ImageBuffer, ImageFormat, Rgba};
+use wgpu::{Device, Queue};
 
 pub struct TrackLayers {
     pub inner: FeatureLayer<
@@ -175,7 +176,7 @@ pub fn get_layers(coords: &[Point<f64>], track_color: Option<Color>) -> TrackLay
 /// Renders an OSM map with the provided track overlay and returns a `data:image/png;base64,...` href.
 ///
 /// `coords` are expected to be WGS84 lon/lat points.
-pub fn render_track_map_href(
+pub async fn render_track_map_href_async(
     coords: &[Point<f64>],
     image_size: Size<u32>,
     track_color: Option<Color>,
@@ -205,20 +206,22 @@ pub fn render_track_map_href(
         .expect("tile schema has zoom level 17");
     let resolution = (width_resolution.max(height_resolution) * 1.1).max(min_resolution);
 
-    let mut osm = RasterTileLayerBuilder::new_osm()
-        .with_file_cache_checked(".tile_cache")
+    #[cfg(target_arch = "wasm32")]
+    let osm_builder = RasterTileLayerBuilder::new_rest(|index| {
+        format!("/tiles/{}/{}/{}.png", index.z, index.x, index.y)
+    });
+
+    #[cfg(not(target_arch = "wasm32"))]
+    let osm_builder = RasterTileLayerBuilder::new_osm().with_file_cache_checked(".tile_cache");
+    let mut osm = osm_builder
         .build()
         .map_err(|e| anyhow!("error creating OSM layer: {e}"))?;
+
     // Without this, the first render can be partially transparent due to fade-in.
     osm.set_fade_in_duration(Duration::default());
 
     let map_view = MapView::new_projected(&center, resolution).with_size(image_size.cast());
-
-    // Galileo tile loading & rendering are async; keep this module usable from sync callers.
-    let runtime = tokio::runtime::Runtime::new()?;
-    runtime.block_on(async {
-        osm.load_tiles(&map_view).await;
-    });
+    osm.load_tiles(&map_view).await;
 
     let layers: Vec<Box<dyn Layer>> = vec![
         Box::new(osm),
@@ -228,16 +231,17 @@ pub fn render_track_map_href(
 
     let map = Map::new(map_view, layers, None::<Box<dyn Messenger>>);
 
-    let renderer = runtime
-        .block_on(async { WgpuRenderer::new_with_texture_rt(image_size).await })
+    let renderer = WgpuRenderer::new_with_texture_rt(image_size)
+        .await
         .ok_or(anyhow!("error creating renderer"))?;
 
     renderer
         .render(&map)
         .map_err(|e| anyhow!("error rendering map: {e}"))?;
 
-    let bitmap = runtime
-        .block_on(async { renderer.get_image().await })
+    let bitmap = renderer
+        .get_image()
+        .await
         .map_err(|e| anyhow!("error retrieving rendered bitmap: {e}"))?;
 
     let buffer =
@@ -248,6 +252,116 @@ pub fn render_track_map_href(
     DynamicImage::ImageRgba8(buffer).write_to(&mut Cursor::new(&mut png), ImageFormat::Png)?;
 
     Ok(format!("data:image/png;base64,{}", BASE64.encode(png)))
+}
+
+/// Same as [`render_track_map_href_async`] but reuses an existing wgpu `Device`/`Queue`.
+///
+/// This avoids creating a second WebGPU device (problematic on wasm).
+pub async fn render_track_map_href_with_wgpu_async(
+    device: Device,
+    queue: Queue,
+    coords: &[Point<f64>],
+    image_size: Size<u32>,
+    track_color: Option<Color>,
+) -> Result<String> {
+    if coords.is_empty() {
+        return Err(anyhow!("error building map: no coordinates"));
+    }
+
+    if image_size.width() == 0 || image_size.height() == 0 {
+        return Err(anyhow!("error building map: invalid image size"));
+    }
+
+    let track_layers = get_layers(coords, track_color);
+
+    let extent = track_layers
+        .inner
+        .extent_projected(&Crs::EPSG3857)
+        .ok_or(anyhow!("error building map: track extent unavailable"))?;
+    let center = extent.center();
+
+    let width_resolution = extent.width() / image_size.width() as f64;
+    let height_resolution = extent.height() / image_size.height() as f64;
+    let min_resolution = TileSchemaBuilder::web_mercator(0..=18)
+        .build()
+        .expect("default tile schema is valid")
+        .lod_resolution(17)
+        .expect("tile schema has zoom level 17");
+    let resolution = (width_resolution.max(height_resolution) * 1.1).max(min_resolution);
+
+    #[cfg(target_arch = "wasm32")]
+    let osm_builder = RasterTileLayerBuilder::new_osm();
+
+    #[cfg(not(target_arch = "wasm32"))]
+    let osm_builder = RasterTileLayerBuilder::new_osm().with_file_cache_checked(".tile_cache");
+    let mut osm = osm_builder
+        .build()
+        .map_err(|e| anyhow!("error creating OSM layer: {e}"))?;
+
+    osm.set_fade_in_duration(Duration::default());
+
+    let map_view = MapView::new_projected(&center, resolution).with_size(image_size.cast());
+    osm.load_tiles(&map_view).await;
+
+    let layers: Vec<Box<dyn Layer>> = vec![
+        Box::new(osm),
+        Box::new(track_layers.outline),
+        Box::new(track_layers.inner),
+    ];
+
+    let map = Map::new(map_view, layers, None::<Box<dyn Messenger>>);
+
+    let renderer = WgpuRenderer::new_with_device_and_texture(device, queue, image_size);
+
+    renderer
+        .render(&map)
+        .map_err(|e| anyhow!("error rendering map: {e}"))?;
+
+    let bitmap = renderer
+        .get_image()
+        .await
+        .map_err(|e| anyhow!("error retrieving rendered bitmap: {e}"))?;
+
+    let buffer =
+        ImageBuffer::<Rgba<u8>, _>::from_raw(image_size.width(), image_size.height(), bitmap)
+            .ok_or(anyhow!("error creating image buffer"))?;
+
+    let mut png = Vec::new();
+    DynamicImage::ImageRgba8(buffer).write_to(&mut Cursor::new(&mut png), ImageFormat::Png)?;
+
+    Ok(format!("data:image/png;base64,{}", BASE64.encode(png)))
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub fn render_track_map_href(
+    coords: &[Point<f64>],
+    image_size: Size<u32>,
+    track_color: Option<Color>,
+) -> Result<String> {
+    let runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()?;
+    runtime.block_on(render_track_map_href_async(coords, image_size, track_color))
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+pub fn render_track_map_href_with_wgpu(
+    device: Device,
+    queue: Queue,
+    coords: &[Point<f64>],
+    image_size: Size<u32>,
+    track_color: Option<Color>,
+) -> Result<String> {
+    let runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()?;
+    runtime.block_on(render_track_map_href_with_wgpu_async(
+        device,
+        queue,
+        coords,
+        image_size,
+        track_color,
+    ))
 }
 
 fn simplify_linestring(raw: &LineString<f64>, max_points: usize) -> LineString<f64> {

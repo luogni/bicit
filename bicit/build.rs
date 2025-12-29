@@ -10,14 +10,21 @@ fn main() {
         .expect("templates directory should exist")
         .filter_map(|e| e.ok())
         .map(|e| e.path())
+        .filter(|p| {
+            p.file_name().is_some_and(|f| {
+                f.to_str()
+                    .is_some_and(|name| name.starts_with("dev") == false)
+            })
+        })
         .filter(|p| p.extension().is_some_and(|ext| ext == "svg"))
         .collect();
 
     // Sort for deterministic output
     entries.sort();
 
-    let mut code =
-        String::from("/// Auto-generated list of embedded templates\npub const EMBEDDED_TEMPLATES: &[EmbeddedTemplate] = &[\n");
+    let mut code = String::from(
+        "/// Auto-generated list of embedded templates\npub const EMBEDDED_TEMPLATES: &[EmbeddedTemplate] = &[\n",
+    );
 
     for path in &entries {
         let name = path.file_stem().unwrap().to_string_lossy();

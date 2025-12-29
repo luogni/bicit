@@ -20,4 +20,7 @@ fontdb = { version = "0.23.0", default-features = false }
 galileo = { git = "https://github.com/galileo-map/galileo", package = "galileo" }
 galileo-types = { git = "https://github.com/galileo-map/galileo", package = "galileo-types" }
 image = { version = "0.25.9", default-features = false, features = ["png"] }
-tokio = "1.48.0"
+wgpu = "27.0.1"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tokio = { version = "1.48.0", features = ["rt", "time"] }
