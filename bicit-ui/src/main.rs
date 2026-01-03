@@ -147,59 +147,55 @@ fn render_svg_to_color_image(
     ))
 }
 
-#[derive(Default)]
-struct MapAssetState {
-    desired: Option<MapImageRequest>,
-    ready: Option<(MapImageRequest, String)>,
-    in_flight: Option<InFlightMap>,
-    generation: u64,
+#[derive(Debug)]
+enum MapJobKind {
+    Preview,
+
+    #[cfg(target_arch = "wasm32")]
+    ExportWasm {
+        filename: String,
+        template_svg: &'static str,
+    },
 }
 
-struct InFlightMap {
-    generation: u64,
+struct MapJobInFlight {
+    kind: MapJobKind,
     request: MapImageRequest,
+
     #[cfg(target_arch = "wasm32")]
     result: Rc<RefCell<Option<anyhow::Result<String>>>>,
+
     #[cfg(not(target_arch = "wasm32"))]
     rx: mpsc::Receiver<anyhow::Result<String>>,
 }
 
-struct MapAssetProvider<'a> {
-    state: &'a MapAssetState,
+struct ImageMapAssetProvider {
+    map_href: Option<String>,
 }
 
-impl AssetProvider for MapAssetProvider<'_> {
+impl AssetProvider for ImageMapAssetProvider {
     fn get_image(
         &self,
         id: &str,
-        w_px: u32,
-        h_px: u32,
-        track_color: Option<galileo::Color>,
+        _w_px: u32,
+        _h_px: u32,
+        _track_color: Option<galileo::Color>,
     ) -> Option<String> {
         if id != "image_map" {
             return None;
         }
 
-        if let Some((req, href)) = &self.state.ready {
-            if req.w_px == w_px && req.h_px == h_px && req.track_color == track_color {
-                return Some(href.clone());
-            }
-        }
-
-        Some(TRANSPARENT_PNG_DATA_URL.to_string())
+        Some(
+            self.map_href
+                .clone()
+                .unwrap_or_else(|| TRANSPARENT_PNG_DATA_URL.to_string()),
+        )
     }
 }
 
 #[cfg(target_arch = "wasm32")]
 struct GpxPickInFlight {
     result: Rc<RefCell<Option<anyhow::Result<(String, Vec<u8>)>>>>,
-}
-
-#[cfg(target_arch = "wasm32")]
-struct ExportInFlight {
-    filename: String,
-    template_svg: &'static str,
-    map_href: Rc<RefCell<Option<anyhow::Result<String>>>>,
 }
 
 struct BicitApp {
@@ -219,11 +215,11 @@ struct BicitApp {
     gpx_context: Option<Context>,
     #[cfg(target_arch = "wasm32")]
     gpx_pick: Option<GpxPickInFlight>,
-    #[cfg(target_arch = "wasm32")]
-    export_in_flight: Option<ExportInFlight>,
+    // One shared map render job at a time
+    map_job: Option<MapJobInFlight>,
 
-    // Async map bitmap for preview
-    map_assets: MapAssetState,
+    // Cached rendered map href for preview
+    preview_map: Option<(MapImageRequest, String)>,
 
     // Preview state
     preview_texture: Option<TextureHandle>,
@@ -261,15 +257,15 @@ impl BicitApp {
             gpx_context: None,
             #[cfg(target_arch = "wasm32")]
             gpx_pick: None,
-            #[cfg(target_arch = "wasm32")]
-            export_in_flight: None,
-            map_assets: MapAssetState::default(),
+            map_job: None,
+            preview_map: None,
             preview_texture: None,
             preview_dirty: true,
             status_message: None,
         }
     }
 
+    #[cfg(not(target_arch = "wasm32"))]
     fn load_gpx(&mut self, path: PathBuf) -> Result<()> {
         let filename = path.to_str().ok_or(anyhow!("Invalid path"))?;
         let mut ctx = Context::new(filename);
@@ -301,7 +297,9 @@ impl BicitApp {
 
         self.gpx_path = Some(path);
         self.gpx_context = Some(ctx);
-        self.map_assets = MapAssetState::default();
+        self.map_job = None;
+        self.preview_map = None;
+        self.preview_texture = None;
         self.preview_dirty = true;
         self.status_message = Some("GPX loaded successfully".to_string());
 
@@ -336,7 +334,9 @@ impl BicitApp {
 
         self.gpx_path = Some(PathBuf::from(filename));
         self.gpx_context = Some(ctx);
-        self.map_assets = MapAssetState::default();
+        self.map_job = None;
+        self.preview_map = None;
+        self.preview_texture = None;
         self.preview_dirty = true;
         self.status_message = Some("GPX loaded successfully".to_string());
 
@@ -396,220 +396,16 @@ impl BicitApp {
         egui_ctx.request_repaint();
     }
 
-    #[cfg(target_arch = "wasm32")]
-    fn start_export_wasm(&mut self, egui_ctx: egui::Context) {
-        if self.export_in_flight.is_some() {
+    fn start_map_job(
+        &mut self,
+        kind: MapJobKind,
+        request: MapImageRequest,
+        coords: Vec<geo_types::Point<f64>>,
+        egui_ctx: egui::Context,
+    ) {
+        if self.map_job.is_some() {
             return;
         }
-
-        let Some(ref gpx_ctx) = self.gpx_context else {
-            self.status_message = Some("No GPX data available".to_string());
-            return;
-        };
-
-        let filename = self
-            .gpx_path
-            .as_ref()
-            .and_then(|p| p.file_stem())
-            .map(|s| format!("{}.png", s.to_string_lossy()))
-            .unwrap_or_else(|| "output.png".to_string());
-
-        let template = &self.templates[self.selected_template_idx];
-        let bicit_template = Template::new(template.content);
-        let request = bicit_template.desired_map_image_request();
-
-        // If the template doesn't ask for a map image, we can export immediately.
-        if request.is_none() {
-            struct ExportAssetProvider;
-            impl AssetProvider for ExportAssetProvider {
-                fn get_image(
-                    &self,
-                    id: &str,
-                    _w_px: u32,
-                    _h_px: u32,
-                    _track_color: Option<galileo::Color>,
-                ) -> Option<String> {
-                    if id != "image_map" {
-                        return None;
-                    }
-                    Some(TRANSPARENT_PNG_DATA_URL.to_string())
-                }
-            }
-
-            let svg = match bicit_template.apply_with(gpx_ctx, &ExportAssetProvider) {
-                Ok(svg) => svg,
-                Err(e) => {
-                    self.status_message = Some(format!("Template error: {e}"));
-                    return;
-                }
-            };
-
-            let png = match render_svg_to_png_bytes(&svg, 1.0) {
-                Ok(png) => png,
-                Err(e) => {
-                    self.status_message = Some(format!("SVG render error: {e}"));
-                    return;
-                }
-            };
-
-            if let Err(e) = download_bytes_as_file(&filename, &png, "image/png") {
-                self.status_message = Some(format!("Export failed: {e}"));
-            } else {
-                self.status_message = Some(format!("Downloaded {filename}"));
-            }
-
-            gpx_ctx.cleanup_temp_files();
-            egui_ctx.request_repaint();
-            return;
-        }
-
-        let req = request.expect("request checked");
-
-        let Some(coords_slice) = gpx_ctx.coords() else {
-            self.status_message = Some("No GPX coordinates".to_string());
-            return;
-        };
-        let coords: Vec<_> = coords_slice.to_vec();
-
-        let device = self.wgpu_device.clone();
-        let queue = self.wgpu_queue.clone();
-
-        let map_href = Rc::new(RefCell::new(None));
-        let map_href_cell = map_href.clone();
-        let egui_ctx2 = egui_ctx.clone();
-
-        spawn_local(async move {
-            let res = bicit::map::render_track_map_href_with_wgpu_async(
-                device,
-                queue,
-                &coords,
-                CartesianSize::<u32>::new(req.w_px, req.h_px),
-                req.track_color,
-            )
-            .await;
-            *map_href_cell.borrow_mut() = Some(res);
-            egui_ctx2.request_repaint();
-        });
-
-        self.export_in_flight = Some(ExportInFlight {
-            filename,
-            template_svg: template.content,
-            map_href,
-        });
-        self.status_message = Some("Exporting...".to_string());
-        egui_ctx.request_repaint();
-    }
-
-    #[cfg(target_arch = "wasm32")]
-    fn poll_export(&mut self, egui_ctx: &egui::Context) {
-        let Some(in_flight) = self.export_in_flight.take() else {
-            return;
-        };
-
-        let completed = in_flight.map_href.borrow_mut().take();
-        let Some(result) = completed else {
-            self.export_in_flight = Some(in_flight);
-            return;
-        };
-
-        let Some(ref gpx_ctx) = self.gpx_context else {
-            self.status_message = Some("No GPX data available".to_string());
-            return;
-        };
-
-        let map_href = match result {
-            Ok(href) => href,
-            Err(e) => {
-                self.status_message = Some(format!("Map render error: {e}"));
-                return;
-            }
-        };
-
-        struct ExportAssetProvider {
-            map_href: String,
-        }
-
-        impl AssetProvider for ExportAssetProvider {
-            fn get_image(
-                &self,
-                id: &str,
-                _w_px: u32,
-                _h_px: u32,
-                _track_color: Option<galileo::Color>,
-            ) -> Option<String> {
-                if id != "image_map" {
-                    return None;
-                }
-                Some(self.map_href.clone())
-            }
-        }
-
-        let bicit_template = Template::new(in_flight.template_svg);
-        let svg = match bicit_template.apply_with(gpx_ctx, &ExportAssetProvider { map_href }) {
-            Ok(svg) => svg,
-            Err(e) => {
-                self.status_message = Some(format!("Template error: {e}"));
-                return;
-            }
-        };
-
-        let png = match render_svg_to_png_bytes(&svg, 1.0) {
-            Ok(png) => png,
-            Err(e) => {
-                self.status_message = Some(format!("SVG render error: {e}"));
-                return;
-            }
-        };
-
-        if let Err(e) = download_bytes_as_file(&in_flight.filename, &png, "image/png") {
-            self.status_message = Some(format!("Export failed: {e}"));
-        } else {
-            self.status_message = Some(format!("Downloaded {}", in_flight.filename));
-        }
-
-        gpx_ctx.cleanup_temp_files();
-        egui_ctx.request_repaint();
-    }
-
-    fn ensure_map_render_started(&mut self, egui_ctx: &egui::Context) {
-        #[cfg(not(target_arch = "wasm32"))]
-        let _ = egui_ctx;
-
-        let Some(gpx_ctx) = self.gpx_context.as_ref() else {
-            return;
-        };
-        let Some(request) = self.map_assets.desired else {
-            return;
-        };
-
-        if self
-            .map_assets
-            .ready
-            .as_ref()
-            .is_some_and(|(req, _)| *req == request)
-        {
-            return;
-        }
-
-        if self
-            .map_assets
-            .in_flight
-            .as_ref()
-            .is_some_and(|in_flight| in_flight.request == request)
-        {
-            return;
-        }
-
-        let Some(coords_slice) = gpx_ctx.coords() else {
-            return;
-        };
-        let coords: Vec<_> = coords_slice.to_vec();
-        if coords.is_empty() {
-            return;
-        }
-
-        self.map_assets.generation = self.map_assets.generation.wrapping_add(1);
-        let generation = self.map_assets.generation;
 
         #[cfg(target_arch = "wasm32")]
         {
@@ -632,8 +428,8 @@ impl BicitApp {
                 egui_ctx.request_repaint();
             });
 
-            self.map_assets.in_flight = Some(InFlightMap {
-                generation,
+            self.map_job = Some(MapJobInFlight {
+                kind,
                 request,
                 result,
             });
@@ -641,6 +437,8 @@ impl BicitApp {
 
         #[cfg(not(target_arch = "wasm32"))]
         {
+            let _ = egui_ctx;
+
             let device = self.wgpu_device.clone();
             let queue = self.wgpu_queue.clone();
 
@@ -656,16 +454,12 @@ impl BicitApp {
                 let _ = tx.send(res);
             });
 
-            self.map_assets.in_flight = Some(InFlightMap {
-                generation,
-                request,
-                rx,
-            });
+            self.map_job = Some(MapJobInFlight { kind, request, rx });
         }
     }
 
-    fn poll_map_render(&mut self, egui_ctx: &egui::Context) {
-        let Some(in_flight) = self.map_assets.in_flight.take() else {
+    fn poll_map_job(&mut self, egui_ctx: &egui::Context) {
+        let Some(in_flight) = self.map_job.take() else {
             return;
         };
 
@@ -682,53 +476,220 @@ impl BicitApp {
         };
 
         let Some(result) = completed else {
-            self.map_assets.in_flight = Some(in_flight);
+            self.map_job = Some(in_flight);
             return;
         };
 
-        let desired_matches = self.map_assets.desired == Some(in_flight.request);
-        if in_flight.generation == self.map_assets.generation && desired_matches {
-            match result {
-                Ok(href) => {
-                    self.map_assets.ready = Some((in_flight.request, href));
+        match result {
+            Ok(href) => match in_flight.kind {
+                MapJobKind::Preview => {
+                    self.preview_map = Some((in_flight.request, href));
+                    self.preview_dirty = true;
+                    egui_ctx.request_repaint();
                 }
-                Err(e) => {
-                    self.status_message = Some(format!("Map render error: {e}"));
-                }
-            }
 
-            self.preview_dirty = true;
-            egui_ctx.request_repaint();
+                #[cfg(target_arch = "wasm32")]
+                MapJobKind::ExportWasm {
+                    filename,
+                    template_svg,
+                } => {
+                    self.export_wasm_with_map_href(&filename, template_svg, Some(href), egui_ctx);
+                }
+            },
+            Err(e) => {
+                self.status_message = Some(format!("Map render error: {e}"));
+                egui_ctx.request_repaint();
+            }
         }
     }
 
+    #[cfg(target_arch = "wasm32")]
+    fn export_wasm_with_map_href(
+        &mut self,
+        filename: &str,
+        template_svg: &'static str,
+        map_href: Option<String>,
+        egui_ctx: &egui::Context,
+    ) {
+        let Some(ref gpx_ctx) = self.gpx_context else {
+            self.status_message = Some("No GPX data available".to_string());
+            return;
+        };
+
+        let bicit_template = Template::new(template_svg);
+        let assets = ImageMapAssetProvider { map_href };
+
+        let svg = match bicit_template.apply_with(gpx_ctx, &assets) {
+            Ok(svg) => svg,
+            Err(e) => {
+                self.status_message = Some(format!("Template error: {e}"));
+                return;
+            }
+        };
+
+        let png = match render_svg_to_png_bytes(&svg, 1.0) {
+            Ok(png) => png,
+            Err(e) => {
+                self.status_message = Some(format!("SVG render error: {e}"));
+                return;
+            }
+        };
+
+        if let Err(e) = download_bytes_as_file(filename, &png, "image/png") {
+            self.status_message = Some(format!("Export failed: {e}"));
+        } else {
+            self.status_message = Some(format!("Downloaded {filename}"));
+        }
+
+        gpx_ctx.cleanup_temp_files();
+        egui_ctx.request_repaint();
+    }
+
+    #[cfg(target_arch = "wasm32")]
+    fn start_export_wasm(&mut self, egui_ctx: egui::Context) {
+        if self.map_job.is_some() {
+            self.status_message = Some("Busy (map rendering in progress)".to_string());
+            return;
+        }
+
+        let Some(ref gpx_ctx) = self.gpx_context else {
+            self.status_message = Some("No GPX data available".to_string());
+            return;
+        };
+
+        let filename = self
+            .gpx_path
+            .as_ref()
+            .and_then(|p| p.file_stem())
+            .map(|s| format!("{}.png", s.to_string_lossy()))
+            .unwrap_or_else(|| "output.png".to_string());
+
+        let template = &self.templates[self.selected_template_idx];
+        let bicit_template = Template::new(template.content);
+        let request = bicit_template.desired_map_image_request();
+
+        // If the template doesn't ask for a map image, export immediately.
+        if request.is_none() {
+            self.export_wasm_with_map_href(&filename, template.content, None, &egui_ctx);
+            return;
+        }
+
+        let req = request.expect("request checked");
+
+        if let Some((cached_req, href)) = &self.preview_map {
+            if *cached_req == req {
+                self.export_wasm_with_map_href(
+                    &filename,
+                    template.content,
+                    Some(href.clone()),
+                    &egui_ctx,
+                );
+                return;
+            }
+        }
+
+        let Some(coords_slice) = gpx_ctx.coords() else {
+            self.status_message = Some("No GPX coordinates".to_string());
+            return;
+        };
+
+        let coords = coords_slice.to_vec();
+        if coords.is_empty() {
+            self.status_message = Some("No GPX coordinates".to_string());
+            return;
+        }
+
+        self.start_map_job(
+            MapJobKind::ExportWasm {
+                filename,
+                template_svg: template.content,
+            },
+            req,
+            coords,
+            egui_ctx.clone(),
+        );
+        self.status_message = Some("Exporting...".to_string());
+        egui_ctx.request_repaint();
+    }
+
     fn regenerate_preview(&mut self, ctx: &egui::Context) {
+        let Some(gpx_ctx) = self.gpx_context.as_ref() else {
+            self.preview_texture = None;
+            self.preview_dirty = false;
+            return;
+        };
+
         let template = &self.templates[self.selected_template_idx];
         let bicit_template = Template::new(template.content);
 
-        let svg_content = if self.gpx_context.is_some() {
-            self.map_assets.desired = bicit_template.desired_map_image_request();
-            self.ensure_map_render_started(ctx);
+        let request = bicit_template.desired_map_image_request();
+        let map_href = match request {
+            None => None,
+            Some(req) => {
+                if let Some((cached_req, href)) = &self.preview_map {
+                    if *cached_req == req {
+                        Some(href.clone())
+                    } else {
+                        if self.map_job.is_none() {
+                            let Some(coords_slice) = gpx_ctx.coords() else {
+                                self.status_message = Some("No GPX coordinates".to_string());
+                                self.preview_texture = None;
+                                self.preview_dirty = false;
+                                return;
+                            };
 
-            let gpx_ctx = self.gpx_context.as_ref().expect("gpx_context checked");
-            let assets = MapAssetProvider {
-                state: &self.map_assets,
-            };
+                            let coords = coords_slice.to_vec();
+                            if coords.is_empty() {
+                                self.status_message = Some("No GPX coordinates".to_string());
+                                self.preview_texture = None;
+                                self.preview_dirty = false;
+                                return;
+                            }
 
-            match bicit_template.apply_with(gpx_ctx, &assets) {
-                Ok(svg) => svg,
-                Err(e) => {
-                    self.status_message = Some(format!("Preview error: {}", e));
+                            self.start_map_job(MapJobKind::Preview, req, coords, ctx.clone());
+                        }
+
+                        // Template wants a map but we don't have it yet.
+                        self.preview_texture = None;
+                        self.preview_dirty = false;
+                        return;
+                    }
+                } else {
+                    if self.map_job.is_none() {
+                        let Some(coords_slice) = gpx_ctx.coords() else {
+                            self.status_message = Some("No GPX coordinates".to_string());
+                            self.preview_texture = None;
+                            self.preview_dirty = false;
+                            return;
+                        };
+
+                        let coords = coords_slice.to_vec();
+                        if coords.is_empty() {
+                            self.status_message = Some("No GPX coordinates".to_string());
+                            self.preview_texture = None;
+                            self.preview_dirty = false;
+                            return;
+                        }
+
+                        self.start_map_job(MapJobKind::Preview, req, coords, ctx.clone());
+                    }
+
+                    self.preview_texture = None;
+                    self.preview_dirty = false;
                     return;
                 }
             }
-        } else {
-            // No GPX loaded - show template with placeholder values
-            self.map_assets.desired = None;
-            template.content.to_string()
         };
 
-        // Render SVG to texture using resvg via usvg
+        let assets = ImageMapAssetProvider { map_href };
+        let svg_content = match bicit_template.apply_with(gpx_ctx, &assets) {
+            Ok(svg) => svg,
+            Err(e) => {
+                self.status_message = Some(format!("Preview error: {e}"));
+                return;
+            }
+        };
+
         match render_svg_to_color_image(&svg_content, 540, 960) {
             Ok(image) => {
                 self.preview_texture =
@@ -736,7 +697,7 @@ impl BicitApp {
                 self.preview_dirty = false;
             }
             Err(e) => {
-                self.status_message = Some(format!("SVG render error: {}", e));
+                self.status_message = Some(format!("SVG render error: {e}"));
             }
         }
     }
@@ -798,30 +759,7 @@ impl BicitApp {
                 None => None,
             };
 
-            struct ExportAssetProvider {
-                map_href: Option<String>,
-            }
-
-            impl AssetProvider for ExportAssetProvider {
-                fn get_image(
-                    &self,
-                    id: &str,
-                    _w_px: u32,
-                    _h_px: u32,
-                    _track_color: Option<galileo::Color>,
-                ) -> Option<String> {
-                    if id != "image_map" {
-                        return None;
-                    }
-                    Some(
-                        self.map_href
-                            .clone()
-                            .unwrap_or_else(|| TRANSPARENT_PNG_DATA_URL.to_string()),
-                    )
-                }
-            }
-
-            let assets = ExportAssetProvider { map_href };
+            let assets = ImageMapAssetProvider { map_href };
 
             let svg = match bicit_template.apply_with(gpx_ctx, &assets) {
                 Ok(svg) => svg,
@@ -869,7 +807,7 @@ impl BicitApp {
     }
 
     fn show_preview(&mut self, ui: &mut egui::Ui) {
-        self.poll_map_render(ui.ctx());
+        self.poll_map_job(ui.ctx());
 
         if self.preview_dirty {
             self.regenerate_preview(ui.ctx());
@@ -889,8 +827,16 @@ impl BicitApp {
                 ui.image((texture.id(), size));
             });
         } else {
+            let msg = if self.gpx_context.is_none() {
+                "Load a GPX to preview"
+            } else if self.map_job.is_some() {
+                "Rendering map..."
+            } else {
+                "No preview available"
+            };
+
             ui.centered_and_justified(|ui| {
-                ui.label("No preview available");
+                ui.label(msg);
             });
         }
     }
@@ -901,10 +847,11 @@ impl eframe::App for BicitApp {
         let screen_width = ctx.input(|i| i.viewport_rect().width());
         let is_narrow = screen_width < NARROW_BREAKPOINT;
 
+        self.poll_map_job(ctx);
+
         #[cfg(target_arch = "wasm32")]
         {
             self.poll_gpx_pick(ctx);
-            self.poll_export(ctx);
         }
 
         // Top panel: header
@@ -916,10 +863,9 @@ impl eframe::App for BicitApp {
                         if let Some(path) = rfd::FileDialog::new()
                             .add_filter("GPX", &["gpx"])
                             .pick_file()
+                            && let Err(e) = self.load_gpx(path)
                         {
-                            if let Err(e) = self.load_gpx(path) {
-                                self.status_message = Some(format!("Error: {}", e));
-                            }
+                            self.status_message = Some(format!("Error: {e}"));
                         }
                     }
 

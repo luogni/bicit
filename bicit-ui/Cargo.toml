@@ -9,21 +9,18 @@ eframe = { version = "0.33.3", default-features = false, features = [
     "default_fonts",
 ] }
 egui = "0.33.3"
-egui_extras = { version = "0.33.3", features = ["image"] }
 tiny-skia = "0.11"
 # Map rendering (use git main, not crates.io release)
-fontdb = { version = "0.23.0", default-features = false }
 galileo = { git = "https://github.com/galileo-map/galileo", package = "galileo" }
 galileo-types = { git = "https://github.com/galileo-map/galileo", package = "galileo-types" }
 galileo-egui = { git = "https://github.com/galileo-map/galileo", package = "galileo-egui" }
 image = { version = "0.25.9", default-features = false, features = ["png"] }
-serde = "1.0.228"
+geo-types = "0.7.18"
 bicit = { version = "0.1.0", path = "../bicit" }
 rfd = "0.16.0"
 anyhow = "1.0.100"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-tokio = { version = "1.48.0", features = ["rt-multi-thread"] }
 resvg = "0.45"
 usvg = "0.45"
 
@@ -42,7 +39,6 @@ web-sys = { version = "0.3.70", features = [
     "Window",
 ] }
 getrandom = { version = "0.2.16", features = ["js"] }
-tokio = { version = "1.48.0", features = ["rt"] }
 resvg = { version = "0.45", default-features = false, features = [
     "raster-images",
     "text",
