@@ -13,3 +13,4 @@ bicit-ui/dist/.stage/
 bicit-ui/dist/
 /rustfmt.toml
 /wrangler.toml
+/bicit-ui/target/
