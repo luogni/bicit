@@ -859,6 +859,7 @@ impl eframe::App for BicitApp {
 
         // Top panel: header
         egui::TopBottomPanel::top("header").show(ctx, |ui| {
+            ui.add_space(4.0);
             ui.horizontal(|ui| {
                 if ui.button("Open GPX...").clicked() {
                     #[cfg(not(target_arch = "wasm32"))]
@@ -879,6 +880,7 @@ impl eframe::App for BicitApp {
                 }
 
                 ui.with_layout(Layout::right_to_left(Align::Center), |ui| {
+                    ui.hyperlink_to("GitHub", "https://github.com/luogni/bicit/");
                     ui.heading("Bicit");
                 });
             });
