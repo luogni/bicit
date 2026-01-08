@@ -353,7 +353,10 @@ impl BicitApp {
             Rc::new(RefCell::new(None));
         let cell2 = cell.clone();
         spawn_local(async move {
-            let picked = rfd::AsyncFileDialog::new().pick_file().await;
+            let picked = rfd::AsyncFileDialog::new()
+                .add_filter("gpx", &["gpx"])
+                .pick_file()
+                .await;
             let result = match picked {
                 Some(handle) => {
                     let name = handle.file_name();
@@ -879,10 +882,6 @@ impl eframe::App for BicitApp {
                     ui.heading("Bicit");
                 });
             });
-        });
-
-        // Bottom panel: template selector + export + status
-        egui::TopBottomPanel::bottom("footer").show(ctx, |ui| {
             ui.add_space(4.0);
 
             // Template selector row
