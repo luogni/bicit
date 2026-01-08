@@ -13,6 +13,11 @@ There are 3 packages:
 2. bicit-cli: command line application
 3. bicit-ui: egui interface (native + wasm)
 
+## Screenshots
+![Merano](docs/merano.png "Merano")
+![Leitenalm](docs/leitenalm.png "Leitenalm")
+
+
 ## Requirements
 
 - Rust toolchain
