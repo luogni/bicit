@@ -14,9 +14,6 @@ There are 3 packages:
 3. bicit-ui: egui interface (native + wasm)
 
 ## Screenshots
-![Merano](docs/merano.png "Merano")
-![Leitenalm](docs/leitenalm.png "Leitenalm")
-
 <img src="docs/merano.png" width="200">
 <img src="docs/leitenalm.png" width="200">
 
