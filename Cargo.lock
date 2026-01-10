@@ -433,8 +433,11 @@ dependencies = [
  "gpx",
  "image 0.25.9",
  "quick-xml 0.38.4",
+ "resvg",
  "time",
+ "tiny-skia",
  "tokio",
+ "usvg",
  "wgpu",
 ]
 

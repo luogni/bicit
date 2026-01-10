@@ -1,6 +1,7 @@
 pub mod context;
 pub mod embedded_templates;
 pub mod map;
+pub mod render;
 pub mod template;
 pub mod time;
 
