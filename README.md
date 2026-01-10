@@ -35,13 +35,17 @@ Run (example using the included sample GPX):
 
 ```sh
 cargo run -- \
-  --datafile test/t1.gpx \
-  --template ../bicit/templates/dev.svg \
-  --outfile out
+  --datafile test/t1.gpx
 ```
 
-Output:
-- `out.png`
+Or with all options:
+
+```sh
+cargo run -- \
+  --datafile test/t1.gpx \
+  --template story_plit \
+  --outfile file.gpx
+```
 
 ## Usage (Application UI)
 Build:
